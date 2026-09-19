@@ -1,0 +1,2282 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MBONG CALCULATOR PRO - Precision Engineering V4.1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfeff',
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+              950: '#083344',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* =========================================
+       MODERN NEO-PCB / TECH LIGHT THEME (SOFTER & SLEEK)
+       ========================================= */
+       
+    /* Scrollbar Dinamis */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
+
+    body {
+        -webkit-font-smoothing: antialiased;
+        overscroll-behavior-y: none;
+        background-color: #f8fafc;
+    }
+
+    /* Latar Belakang: Pola PCB Modern & Halus */
+    .animated-bg {
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -3;
+        background-color: #f8fafc;
+        /* Pola grid dan titik solder yang lebih soft */
+        background-image: 
+            radial-gradient(circle at 50px 50px, rgba(14, 165, 233, 0.1) 4px, transparent 5px),
+            radial-gradient(circle at 150px 100px, rgba(217, 119, 6, 0.08) 6px, transparent 7px),
+            linear-gradient(rgba(14, 165, 233, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(14, 165, 233, 0.03) 1px, transparent 1px);
+        background-size: 200px 200px, 200px 200px, 20px 20px, 20px 20px;
+    }
+
+    /* Animasi Kabel Data/Sirkuit Cahaya Melengkung */
+    .bg-overlay {
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -2;
+        background: radial-gradient(circle at 100% 0%, rgba(224, 242, 254, 0.8) 0%, transparent 50%),
+                    radial-gradient(circle at 0% 100%, rgba(254, 243, 199, 0.6) 0%, transparent 50%);
+    }
+
+    .tech-wire {
+        position: fixed;
+        border: 1px solid rgba(14, 165, 233, 0.15);
+        border-radius: 100px;
+        z-index: -1;
+    }
+    .tech-wire-1 { width: 300px; height: 300px; top: -100px; right: -50px; border-width: 2px; }
+    .tech-wire-2 { width: 500px; height: 500px; bottom: -200px; left: -150px; border-color: rgba(217, 119, 6, 0.1); border-width: 2px; }
+
+    /* Glass Card - Modern Tech Style (Sudut Membulat, Elegan) */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(14, 165, 233, 0.2);
+        box-shadow: 0 10px 40px -10px rgba(14, 165, 233, 0.1), inset 0 1px 0 rgba(255,255,255,1);
+        border-radius: 1.75rem; 
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* Aksen Jalur Tembaga/Sirkuit di Ujung Card */
+    .glass-card::before {
+        content: ''; position: absolute; top: 0; left: 20px; width: 40px; height: 4px;
+        background: linear-gradient(90deg, #0ea5e9, #22d3ee);
+        border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;
+    }
+    .glass-card::after {
+        content: ''; position: absolute; bottom: 0; right: 20px; width: 60px; height: 4px;
+        background: linear-gradient(90deg, #fbbf24, #d97706);
+        border-top-left-radius: 4px; border-top-right-radius: 4px;
+    }
+
+    /* Input Fields Modern - Smooth & Bersih */
+    input[type="number"], input[type="text"], input[type="password"], input[type="tel"], select {
+        background-color: rgba(241, 245, 249, 0.7) !important;
+        border: 1px solid rgba(203, 213, 225, 0.8) !important;
+        color: #0f172a !important;
+        border-radius: 1rem !important;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        transition: all 0.3s ease !important;
+    }
+    input[type="number"]:focus, input[type="text"]:focus, select:focus {
+        border-color: #0ea5e9 !important;
+        box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15), inset 0 2px 4px rgba(0,0,0,0.01) !important;
+        background-color: #ffffff !important;
+        outline: none;
+    }
+
+    /* Hilangkan Spinners Input */
+    .no-spinners::-webkit-inner-spin-button,
+    .no-spinners::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    .no-spinners { -moz-appearance: textfield; }
+
+    /* LCD Screen Display - Modern Soft Glow */
+    .lcd-display {
+        background: linear-gradient(135deg, #f0fdfa, #e0f2fe);
+        border: 1px solid #bae6fd;
+        border-radius: 1.25rem;
+        box-shadow: inset 0 2px 8px rgba(14, 165, 233, 0.05);
+    }
+
+    /* LED Matrix Visual Box - KOTAK VIDEOTRON REALISTIS */
+    .led-matrix-bg {
+        background-color: #020617; /* Dasar gelap */
+        background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
+        background-size: 4px 4px;
+        border-radius: 2px; /* Kaku/boxy seperti kabinet asli */
+        border: 3px solid #334155; /* Bezel kabinet luar */
+        box-shadow: inset 0 0 8px rgba(0,0,0,0.8), 0 5px 15px -5px rgba(0,0,0,0.3);
+        position: relative;
+    }
+    
+    /* Garis Kabinet (Simulasi pembagian kabinet di layar) */
+    .led-matrix-bg::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: 
+            linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+        background-size: 25% 50%;
+        pointer-events: none;
+    }
+
+    /* Tombol AI - Pulse Energi Elektrik */
+    .btn-ai-glow {
+        background: linear-gradient(90deg, #0284c7, #0ea5e9, #0284c7);
+        background-size: 200% auto;
+        animation: gradientPulse 3s linear infinite;
+        border: none;
+        box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.5), inset 0 1px 1px rgba(255,255,255,0.3);
+        border-radius: 1.5rem !important;
+    }
+    @keyframes gradientPulse { to { background-position: 200% center; } }
+
+    /* Cursor AI */
+    @keyframes blink { 50% { opacity: 0; } }
+    .ai-cursor { display: inline-block; width: 8px; height: 16px; background-color: #22d3ee; margin-left: 3px; animation: blink 1s step-start infinite; box-shadow: 0 0 8px #22d3ee; }
+
+    /* GLOBAL TOUCH & RIPPLE ANIMATION */
+    button, a[href] {
+      -webkit-tap-highlight-color: transparent; 
+      transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s ease !important;
+      position: relative;
+      overflow: hidden; 
+    }
+    button:active, a[href]:active {
+      transform: scale(0.96) !important;
+    }
+    .ripple-effect {
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: rippleAnim 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      pointer-events: none;
+      z-index: 99;
+    }
+    @keyframes rippleAnim {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(4); opacity: 0; }
+    }
+
+    /* =========================================
+       REALISTIC PCB MODUL PROFILE EFFECT
+       ========================================= */
+    .modal-pcb-bg {
+        background-color: #0d4732; /* Base PCB Green */
+        /* Custom SVG Pattern for realistic traces and gold vias */
+        background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20 h 40 l 20 20 v 40 l -20 20 h -20 l -20 -20 z M100 40 v 40 l 20 20 h 20 M40 140 h 40 l 20 -20 v -20 M140 20 l -20 20 v 30 l -20 20 M10 80 h 20 l 20 -20 M120 140 v -20 l -20 -20' fill='none' stroke='rgba(52, 211, 153, 0.3)' stroke-width='4' stroke-linejoin='round'/%3E%3Ccircle cx='20' cy='20' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='60' cy='20' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='80' cy='40' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='80' cy='80' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='60' cy='100' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='40' cy='100' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='20' cy='80' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='100' cy='40' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='140' cy='80' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='40' cy='140' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='80' cy='140' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='100' cy='120' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='140' cy='20' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='10' cy='80' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='120' cy='140' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3C/svg%3E");
+        box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.9), 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        border: 2px solid #041c13;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Teks Cetakan Putih (Silkscreen) */
+    .pcb-silkscreen {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.8);
+        font-family: monospace;
+        font-weight: bold;
+        font-size: 8px;
+        letter-spacing: 1px;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    /* Bodi IC (Integrated Circuit) */
+    .ic-chip {
+        position: absolute;
+        background-color: #111827;
+        border-radius: 2px;
+        box-shadow: 
+            inset 0 1px 1px rgba(255,255,255,0.15),
+            0 4px 8px rgba(0,0,0,0.8),
+            0 0 0 1px #000;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Kaki IC (Pins) Perak */
+    .ic-vertical .pins-left, .ic-vertical .pins-right {
+        position: absolute;
+        top: 4px; bottom: 4px; width: 5px;
+        background-image: repeating-linear-gradient(to bottom, #94a3b8 0px, #e2e8f0 1.5px, #94a3b8 3px, transparent 3px, transparent 6px);
+        z-index: -1;
+    }
+    .ic-vertical .pins-left { left: -5px; border-radius: 2px 0 0 2px; box-shadow: -1px 2px 3px rgba(0,0,0,0.5); }
+    .ic-vertical .pins-right { right: -5px; border-radius: 0 2px 2px 0; box-shadow: 1px 2px 3px rgba(0,0,0,0.5); }
+
+    .ic-horizontal .pins-top, .ic-horizontal .pins-bottom {
+        position: absolute;
+        left: 4px; right: 4px; height: 5px;
+        background-image: repeating-linear-gradient(to right, #94a3b8 0px, #e2e8f0 1.5px, #94a3b8 3px, transparent 3px, transparent 6px);
+        z-index: -1;
+    }
+    .ic-horizontal .pins-top { top: -5px; border-radius: 2px 2px 0 0; box-shadow: 0 -1px 3px rgba(0,0,0,0.5); }
+    .ic-horizontal .pins-bottom { bottom: -5px; border-radius: 0 0 2px 2px; box-shadow: 0 2px 3px rgba(0,0,0,0.5); }
+
+    /* Cetakan Laser di Atas IC */
+    .ic-text {
+        color: rgba(255, 255, 255, 0.25);
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 7px;
+        text-align: center;
+        line-height: 1;
+    }
+    .ic-text.vert { writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); }
+
+    /* Titik Indikator Pin 1 */
+    .ic-dot {
+        position: absolute;
+        width: 4px; height: 4px;
+        background-color: rgba(255,255,255,0.15);
+        border-radius: 50%;
+    }
+
+    /* Komponen SMD (Resistor & Kapasitor) */
+    .smd-comp {
+        position: absolute;
+        width: 6px; height: 12px;
+        background-color: #1c1917; /* Bodi hitam untuk resistor */
+        box-shadow: 0 3px 5px rgba(0,0,0,0.6);
+        z-index: 1;
+        border-radius: 0.5px;
+    }
+    .smd-comp::before, .smd-comp::after {
+        content: ''; position: absolute;
+        left: 0; right: 0; height: 2.5px;
+        background: linear-gradient(90deg, #94a3b8, #f8fafc, #94a3b8); /* Solder perak */
+    }
+    .smd-comp::before { top: -0.5px; border-radius: 1px 1px 0 0; }
+    .smd-comp::after { bottom: -0.5px; border-radius: 0 0 1px 1px; }
+    
+    .smd-cap { background-color: #a0522d; /* Bodi coklat keramik untuk kapasitor */ width: 8px; height: 14px;}
+    .smd-cap::before, .smd-cap::after { height: 3px; }
+
+    .smd-h { transform: rotate(90deg); }
+  </style>
+</head>
+<body class="text-slate-700 min-h-screen font-sans antialiased flex flex-col justify-between selection:bg-cyan-500 selection:text-white">
+
+  <!-- Backgrounds & Tech Accents -->
+  <div class="animated-bg"></div>
+  <div class="bg-overlay"></div>
+  <div class="tech-wire tech-wire-1"></div>
+  <div class="tech-wire tech-wire-2"></div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed top-5 right-5 z-[100] transform transition-all duration-300 pointer-events-none bg-cyan-600 text-white font-bold px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-xs translate-y-[-150%] opacity-0 backdrop-blur-md">
+    <span id="toast-icon" class="text-lg">⚙️</span>
+    <span id="toast-text">Akses Admin diberikan.</span>
+  </div>
+
+  <!-- HEADER MODERN TECH -->
+  <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-cyan-100 shadow-[0_4px_30px_-10px_rgba(14,165,233,0.1)] w-full">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3 sm:gap-4">
+        <!-- Avatar -->
+        <button type="button" onclick="openProfileModal()" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-cyan-400 bg-white shadow-sm flex items-center justify-center flex-shrink-0 p-0.5 relative group">
+          <div class="absolute inset-0 border border-cyan-300 rounded-full animate-ping opacity-20"></div>
+          <img id="main-profile-img" src="https://lh3.googleusercontent.com/d/10uMkYanCm9dP1hFS6FOVtvlZYi4oFhpV" alt="Avatar Profil" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null; this.src='https://via.placeholder.com/150';">
+        </button>
+        <div class="flex flex-col justify-center">
+          <!-- Teks Judul -->
+          <h1 class="font-black text-[14px] sm:text-[20px] md:text-[22px] tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-slate-700 to-slate-900 leading-tight whitespace-nowrap">
+            MBONG CALCULATOR <span class="text-cyan-500 font-mono">PRO</span>
+          </h1>
+          <p id="t-subtitle" onclick="openAboutModal()" class="text-[10px] sm:text-[12px] text-slate-500 font-medium tracking-wide truncate max-w-[160px] sm:max-w-none mt-0.5 cursor-pointer hover:text-cyan-600 transition-colors">Sistem Kalkulasi Resolusi, Video Processor &amp; Rekayasa Daya Videotron V4.1</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+        <select id="lang-select" onchange="changeLanguage(this.value)" class="bg-cyan-50 text-cyan-700 border-none font-bold text-[11px] sm:text-xs rounded-xl px-2 py-1.5 focus:ring-0 cursor-pointer shadow-sm">
+          <option value="id" selected="">🇮🇩 ID</option>
+          <option value="en">🇬🇧 EN</option>
+          <option value="zh">🇨🇳 ZH</option>
+        </select>
+
+        <div id="admin-badge" class="px-2 sm:px-3 py-1.5 bg-amber-50 text-amber-600 border border-amber-200 text-[10px] sm:text-xs rounded-xl font-bold items-center gap-1 sm:gap-2 flex hidden shadow-sm">
+          <span id="t-admin-badge">⚙️ Admin</span>
+          <button onclick="logoutAdmin()" class="text-amber-500 ml-1">✕</button>
+        </div>
+
+        <button onclick="openAdminModal()" id="admin-lock-btn" class="p-2 text-cyan-600 bg-cyan-50 rounded-xl flex items-center justify-center shadow-sm hover:bg-cyan-100 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- KONTEN UTAMA -->
+  <main class="w-full max-w-6xl mx-auto flex-1 relative z-10 flex flex-col">
+    
+    <!-- Tab Navigation -->
+    <div class="sticky top-[58px] sm:top-[68px] z-40 bg-transparent px-4 py-3 w-full max-w-md mx-auto self-center">
+      <div class="flex p-1.5 bg-white/60 backdrop-blur-xl border border-cyan-100/50 rounded-2xl shadow-[0_4px_15px_rgba(14,165,233,0.05)] w-full">
+        <!-- Tab 1 -->
+        <button onclick="switchTab('main')" id="btn-tab-main" class="flex-1 py-3 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-cyan-600 to-blue-500 text-white shadow-md transition-all flex items-center justify-center gap-1.5">
+            <span id="text-tab-main">Kalkulator Utama</span>
+            <div id="help-btn-main" onclick="openHelpModal('main', event)" class="w-4 h-4 rounded-full border border-current flex items-center justify-center text-[10px] opacity-80 hover:opacity-100 transition-all z-10 hover:scale-110" title="Bantuan">?</div>
+        </button>
+        <!-- Tab 2 -->
+        <button onclick="switchTab('ratio')" id="btn-tab-ratio" class="flex-1 py-3 rounded-xl text-xs sm:text-sm font-bold text-slate-500 hover:text-cyan-600 transition-all flex items-center justify-center gap-1.5">
+            <span>⚡</span> <span id="text-tab-ratio">Smart Ratio</span>
+            <div id="help-btn-ratio" onclick="openHelpModal('ratio', event)" class="w-4 h-4 rounded-full border border-current flex items-center justify-center text-[10px] opacity-80 hover:opacity-100 transition-all z-10 hover:scale-110" title="Bantuan">?</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN CALCULATOR TAB -->
+    <div id="tab-main" class="px-4 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 w-full">
+      
+      <!-- KOLOM KIRI -->
+      <div class="lg:col-span-4 flex flex-col gap-5 lg:gap-6">
+        <!-- Card 1: Parameter Input -->
+        <div class="glass-card p-5 sm:p-6">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4 gap-2">
+            <div class="flex items-center gap-2">
+                <h2 id="t-dim-title" class="text-sm font-black text-slate-700 uppercase tracking-widest flex items-center gap-2"><span>📐</span> Dimensi &amp; Modul</h2>
+                <div id="help-btn-dim" onclick="openHelpModal('dim', event)" class="w-4 h-4 rounded-full border border-slate-400 text-slate-400 flex items-center justify-center text-[10px] cursor-pointer hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-600 transition-all z-10" title="Bantuan">?</div>
+            </div>
+            <select id="unit-select" onchange="switchUnit(this.value)" class="rounded-lg px-3 py-1.5 text-[11px] font-bold cursor-pointer border-none bg-cyan-50 text-cyan-700 shadow-sm focus:ring-0">
+              <option id="opt-mm" value="mm">Milimeter</option>
+              <option id="opt-cm" value="cm" selected="">Centimeter</option>
+              <option id="opt-m" value="m">Meter</option>
+            </select>
+          </div>
+
+          <div class="space-y-4">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label id="t-pitch-label" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Pixel Pitch &amp; Tipe Modul</label>
+                <select id="pitch" onchange="calculate()" class="w-full rounded-2xl px-4 py-3.5 text-[13px] font-bold cursor-pointer shadow-sm">
+                  <!-- Otomatis diisi oleh JS -->
+                </select>
+              </div>
+              <div>
+                <label id="t-cabinet-label" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Pixel Pitch &amp; Tipe Kabinet</label>
+                <select id="cabinet" onchange="calculate()" class="w-full rounded-2xl px-4 py-3.5 text-[13px] font-bold cursor-pointer shadow-sm text-slate-700">
+                  <option value="600">P0.9 - P2.5 Indoor (600×337.5mm)</option>
+                  <option value="640">P0.9 - P2.5 Indoor (640×480mm)</option>
+                  <option value="480">P0.9 - P2.5 Indoor (480×480mm)</option>
+                  <option id="opt-cab-640" value="640x640">Kabinet 640x640</option>
+                  <option id="opt-cab-960" value="960x960">Kabinet 960x960</option>
+                  <option id="opt-cab-custom" value="custom" selected>Tanpa Kabinet / Custom</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mt-4">
+              <div>
+                <label id="t-width-label" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Lebar Layar</label>
+                <div class="relative">
+                  <input type="number" id="dim_width" value="32" step="0.01" min="0.001" oninput="calculate()" onkeyup="if(event.key==='Enter') this.blur();" class="w-full px-4 py-3.5 text-base font-black text-slate-800 shadow-sm no-spinners">
+                  <span id="unit-label-w" class="absolute right-4 top-4 text-[10px] text-slate-400 font-bold uppercase">cm</span>
+                </div>
+              </div>
+              <div>
+                <label id="t-height-label" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Tinggi Layar</label>
+                <div class="relative">
+                  <input type="number" id="dim_height" value="16" step="0.01" min="0.001" oninput="calculate()" onkeyup="if(event.key==='Enter') this.blur();" class="w-full px-4 py-3.5 text-base font-black text-slate-800 shadow-sm no-spinners">
+                  <span id="unit-label-h" class="absolute right-4 top-4 text-[10px] text-slate-400 font-bold uppercase">cm</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dimensi Fisik (Widget Look) -->
+          <div class="mt-5 lcd-display p-4 text-[11px] sm:text-xs space-y-2">
+            <div class="flex justify-between items-center">
+              <span id="t-lbl-matrix" class="font-bold text-slate-500">Matriks Modul:</span>
+              <span id="out-module-count" class="text-cyan-800 font-black">1 (W) × 1 (H) = 1 Unit</span>
+            </div>
+            <div class="flex justify-between items-center border-t border-cyan-100 pt-2">
+              <span id="t-lbl-actual-size" class="font-bold text-slate-500">Fisik Aktual:</span>
+              <span id="out-meter-size" class="text-slate-800 font-black">32 × 16 cm</span>
+            </div>
+            <div class="flex justify-between items-center border-t border-cyan-100 pt-2">
+              <span id="t-lbl-area" class="font-bold text-slate-500">Luas Area:</span>
+              <span id="out-area" class="text-emerald-600 font-black text-sm">0.05 m²</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KOLOM KANAN -->
+      <div class="lg:col-span-8 flex flex-col gap-5 lg:gap-6">
+        
+        <!-- Card 2: Resolusi -->
+        <div class="glass-card p-5 sm:p-6">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+            <div class="flex items-center gap-2">
+                <h2 id="t-res-title" class="text-sm font-black text-slate-700 uppercase tracking-widest flex items-center gap-2"><span>📟</span> Resolusi &amp; Rasio</h2>
+                <div id="help-btn-res" onclick="openHelpModal('res', event)" class="w-4 h-4 rounded-full border border-slate-400 text-slate-400 flex items-center justify-center text-[10px] cursor-pointer hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-600 transition-all z-10" title="Bantuan">?</div>
+            </div>
+          </div>
+
+          <div class="lcd-display p-4 flex flex-col sm:flex-row items-center justify-between gap-5 relative overflow-hidden">
+            <!-- Aksen sirkuit air di latar LCD -->
+            <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-cyan-200/40 rounded-full blur-2xl"></div>
+            
+            <div class="text-center sm:text-left space-y-1 w-full relative z-10">
+              <div id="t-lbl-native-res" class="text-[10px] font-black text-cyan-600 uppercase tracking-widest">Resolusi Penuh</div>
+              <div class="text-3xl sm:text-4xl font-black text-slate-800 tracking-tight font-mono">
+                <span id="out-pixel-w">128</span> <span class="text-cyan-400 text-xl mx-0.5 font-sans">×</span> <span id="out-pixel-h">64</span>
+              </div>
+              <div class="text-[11px] text-slate-600 mt-1 font-medium">
+                <span id="t-lbl-total-px">Total:</span> <strong id="out-total-pixels" class="text-cyan-700 ml-1">8.192</strong> Dots <span class="text-slate-400">(<span id="out-mp">0.01</span> MP)</span>
+              </div>
+            </div>
+
+            <!-- Visual Box -->
+            <div class="flex flex-col items-center justify-center bg-white/80 backdrop-blur p-4 lg:p-6 lg:px-10 rounded-2xl border border-white shadow-sm flex-shrink-0 relative z-10 min-w-[120px] lg:minw-[180px]">
+              <div class="transform transition-transform duration-300 md:scale-125 lg:scale-[1.7] md:my-2 lg:my-6">
+                <div id="screen-visual" class="led-matrix-bg flex items-center justify-center text-[10px] font-bold text-cyan-300 transition-all font-mono" style="width: 100px; height: 50px;">
+                  <span id="visual-aspect" class="relative z-10 bg-slate-900/80 px-1 rounded shadow-sm backdrop-blur-sm">2:1</span>
+                </div>
+              </div>
+              <span id="out-standard-ratio" class="text-[9px] text-cyan-600 font-bold mt-3 md:mt-4 lg:mt-8 text-center uppercase tracking-widest relative z-10">Custom</span>
+            </div>
+          </div>
+
+          <div class="mt-4 flex flex-col gap-2 bg-slate-50/80 p-4 rounded-2xl border border-slate-100 text-[11px]">
+            <div class="flex justify-between items-center">
+              <span id="t-lbl-exact-ratio" class="text-slate-500 font-bold">Rasio Aktual:</span>
+              <strong id="out-exact-ratio" class="text-slate-700">2:1 (2.000:1)</strong>
+            </div>
+            <div class="flex justify-between items-center border-t border-slate-200/60 pt-2">
+              <span id="t-lbl-ratio-status" class="text-slate-500 font-bold">Kecocokan:</span>
+              <span id="out-ratio-status" class="text-cyan-600 font-black">-</span>
+            </div>
+            <span id="env-badge" class="hidden">-</span>
+            <span id="res-badge" class="hidden">-</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Controller -->
+        <div class="glass-card p-5 sm:p-6">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+            <div class="flex items-center gap-2">
+                <h2 id="t-proc-title" class="text-sm font-black text-slate-700 uppercase tracking-widest flex items-center gap-2"><span>🔌</span> Controller Pro</h2>
+                <div id="help-btn-proc" onclick="openHelpModal('proc', event)" class="w-4 h-4 rounded-full border border-slate-400 text-slate-400 flex items-center justify-center text-[10px] cursor-pointer hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-600 transition-all z-10" title="Bantuan">?</div>
+            </div>
+            <span id="proc-port-badge" class="text-[9px] bg-cyan-100 text-cyan-700 border border-cyan-200 px-2 py-1 rounded-lg font-bold shadow-sm">1 Port</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- NovaStar Panel -->
+            <div class="bg-gradient-to-br from-white to-slate-50 p-4 rounded-2xl border border-slate-100 relative overflow-hidden shadow-sm group hover:shadow-md transition-shadow">
+              <div class="absolute -right-6 top-3 bg-cyan-500 text-white text-[9px] font-black px-8 py-0.5 rotate-45 shadow-sm">NOVASTAR</div>
+              <div class="flex items-center justify-between mb-2 pr-4">
+                <span class="font-black text-cyan-700 text-xs">⚙️ NovaStar System</span>
+                <span id="out-nova-load-badge" class="text-[9px] px-2 py-0.5 rounded-lg bg-slate-100 text-slate-600 font-bold">Load: 1.0%</span>
+              </div>
+              <div>
+                <div class="text-[9px] text-slate-400 font-bold uppercase mb-0.5 tracking-wider" id="t-nova-main-lbl">Tipe Utama:</div>
+                <div id="out-nova-main" class="text-sm font-black text-slate-800 leading-tight">Novastar TB30</div>
+              </div>
+              <div class="mt-3 flex flex-col gap-1 text-[10px]">
+                <div class="flex justify-between text-slate-500"><span id="t-nova-spec-lbl">Batas HW:</span><strong id="out-nova-cap" class="text-slate-700">-</strong></div>
+                <div class="flex justify-between text-slate-500"><span id="t-nova-alt-lbl">Alternatif:</span><strong id="out-nova-alt" class="text-amber-600 text-right">-</strong></div>
+                <div class="flex justify-between text-slate-500 border-t border-slate-200/60 pt-1 mt-0.5"><span id="t-nova-rc-lbl">Rec. RC:</span><strong class="text-cyan-700 text-right"><span id="out-nova-rc-count">-</span>x MRV412-N / DH7512-s</strong></div>
+              </div>
+            </div>
+
+            <!-- Huidu Panel -->
+            <div class="bg-gradient-to-br from-white to-slate-50 p-4 rounded-2xl border border-slate-100 relative overflow-hidden shadow-sm group hover:shadow-md transition-shadow">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-black text-cyan-700 text-xs">⚡ Huidu (HD) System</span>
+                <span id="out-hd-load-badge" class="text-[9px] px-2 py-0.5 rounded-lg bg-slate-100 text-slate-600 font-bold">Load: 1.0%</span>
+              </div>
+              <div>
+                <div class="text-[9px] text-slate-400 font-bold uppercase mb-0.5 tracking-wider" id="t-hd-main-lbl">Tipe Utama:</div>
+                <div id="out-hd-main" class="text-sm font-black text-slate-800 leading-tight">Huidu HD-A4</div>
+              </div>
+              <div class="mt-3 flex flex-col gap-1 text-[10px]">
+                <div class="flex justify-between text-slate-500"><span id="t-hd-spec-lbl">Batas HW:</span><strong id="out-hd-cap" class="text-slate-700">-</strong></div>
+                <div class="flex justify-between text-slate-500"><span id="t-hd-alt-lbl">Alternatif:</span><strong id="out-hd-alt" class="text-amber-600 text-right">-</strong></div>
+                <div class="flex justify-between text-slate-500 border-t border-slate-200/60 pt-1 mt-0.5"><span id="t-hd-rc-lbl">Rec. RC:</span><strong class="text-cyan-700 text-right"><span id="out-hd-rc-count">-</span>x HD R712</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 flex items-center justify-between bg-cyan-50/50 p-3 rounded-xl border border-cyan-100">
+            <span id="t-lbl-proc-ports" class="text-slate-600 text-[11px] font-bold">Total Kebutuhan Ethernet:</span>
+            <div class="flex items-center gap-1">
+              <strong id="out-proc-ports" class="text-cyan-700 text-sm font-black font-mono">1 Port RJ45</strong>
+              <span id="t-lbl-proc-port-note" class="hidden"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Elektrikal -->
+        <div class="glass-card p-5 sm:p-6">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+            <div class="flex items-center gap-2">
+                <h2 id="t-elec-title" class="text-sm font-black text-slate-700 uppercase tracking-widest flex items-center gap-2"><span>🔋</span> Kelistrikan</h2>
+                <div id="help-btn-elec" onclick="openHelpModal('elec', event)" class="w-4 h-4 rounded-full border border-slate-400 text-slate-400 flex items-center justify-center text-[10px] cursor-pointer hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-600 transition-all z-10" title="Bantuan">?</div>
+            </div>
+            <div class="flex items-center gap-1.5 text-[9px] font-bold text-slate-500">
+              <span class="bg-white border border-slate-200 shadow-sm px-2 py-1 rounded-lg">η=<span id="display-eff-val">88</span>%</span>
+              <span class="bg-white border border-slate-200 shadow-sm px-2 py-1 rounded-lg">PF=<span id="display-pf-val">0.95</span></span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 text-center mb-4">
+            <div class="flex-1 bg-white border border-slate-100 rounded-2xl p-3 shadow-sm">
+              <div id="t-lbl-power-max" class="text-[9px] font-bold text-slate-400 uppercase mb-1 tracking-wider">Max Power</div>
+              <div class="text-lg font-black text-amber-500 font-mono"><span id="out-power-max-kw">0.02</span><span class="text-[10px] ml-0.5 text-slate-400 font-sans font-normal">kW</span></div>
+              <div class="text-[10px] text-slate-500 font-bold mt-1"><span id="out-power-max-w">23</span> W</div>
+            </div>
+            <div class="flex-1 bg-white border border-slate-100 rounded-2xl p-3 shadow-sm">
+              <div id="t-lbl-power-avg" class="text-[9px] font-bold text-slate-400 uppercase mb-1 tracking-wider">Avg Power (~33% Video)</div>
+              <div class="text-lg font-black text-cyan-600 font-mono"><span id="out-power-avg-kw">0.01</span><span class="text-[10px] ml-0.5 text-slate-400 font-sans font-normal">kW</span></div>
+              <div class="text-[10px] text-slate-500 font-bold mt-1"><span id="out-power-avg-w">8</span> W</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <!-- 1 Phase -->
+            <div class="bg-slate-50/80 rounded-2xl p-4 border border-slate-100">
+              <div class="flex items-center justify-between mb-3 border-b border-slate-200/60 pb-2">
+                <span id="t-1p-header" class="text-xs font-black text-slate-600">🔌 1 Fasa (220V)</span>
+                <span id="badge-1phase-status" class="text-[9px] font-bold px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-600">Aman</span>
+              </div>
+              <div class="flex justify-between items-center text-[11px] mb-1.5">
+                <span id="t-lbl-1p-cur" class="text-slate-500 font-bold">Arus Nyata (Ib):</span>
+                <strong class="text-slate-700 font-mono"><span id="out-current-1p">0.11</span> A</strong>
+              </div>
+              <div class="flex justify-between items-center text-[11px] mb-1.5">
+                <span id="t-lbl-1p-mcb" class="text-slate-500 font-bold">MCB:</span>
+                <strong id="out-mcb-1p" class="text-cyan-600">2A (1-Pole)</strong>
+              </div>
+              <div class="flex justify-between items-center text-[11px]">
+                <span id="t-lbl-1p-cable" class="text-slate-500 font-bold">Kabel Utama:</span>
+                <strong id="out-cable-1p" class="text-slate-700">3 × 1.5 mm²</strong>
+              </div>
+            </div>
+
+            <!-- 3 Phase -->
+            <div class="bg-cyan-50/50 rounded-2xl p-4 border border-cyan-100">
+              <div class="flex items-center justify-between mb-3 border-b border-cyan-200/60 pb-2">
+                <span id="t-3p-header" class="text-xs font-black text-cyan-700">⚡ 3 Fasa (380V)</span>
+                <span id="t-3p-badge" class="text-[9px] font-bold px-2 py-0.5 rounded-lg bg-cyan-200 text-cyan-800">Saran</span>
+              </div>
+              <div class="flex justify-between items-center text-[11px] mb-1.5">
+                <span id="t-lbl-3p-cur" class="text-slate-500 font-bold">Arus/Fasa (Ib):</span>
+                <strong class="text-slate-700 font-mono"><span id="out-current-3p">0.04</span> A</strong>
+              </div>
+              <div class="flex justify-between items-center text-[11px] mb-1.5">
+                <span id="t-lbl-3p-mcb" class="text-slate-500 font-bold">MCB:</span>
+                <strong id="out-mcb-3p" class="text-cyan-600">2A (3-Pole)</strong>
+              </div>
+              <div class="flex justify-between items-center text-[11px]">
+                <span id="t-lbl-3p-cable" class="text-slate-500 font-bold">Kabel Utama:</span>
+                <strong id="out-cable-3p" class="text-slate-700">5 × 1.5 mm²</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 flex justify-between items-center bg-slate-800 text-white rounded-xl p-3 shadow-sm">
+            <span id="t-lbl-genset" class="text-[10px] font-bold text-slate-300">Genset Min (80%):</span>
+            <strong id="out-genset" class="text-sm font-black text-emerald-400 font-mono">1 kVA</strong>
+          </div>
+
+          <!-- Hidden spans needed for JS -->
+          <span id="t-lbl-area-watt" class="hidden"></span><span id="out-watt-sqm" class="hidden"></span>
+          <span id="t-lbl-apparent" class="hidden"></span><span id="out-va-max" class="hidden"></span>
+
+          <!-- Panel Admin Internal -->
+          <div id="admin-panel" class="mt-4 bg-slate-50 border border-slate-200 rounded-2xl p-4 hidden">
+            <div class="flex items-center justify-between mb-3 border-b border-slate-200 pb-2">
+              <h3 id="t-adm-title" class="text-xs font-black text-amber-600">⚙️ Admin Panel</h3>
+              <button id="t-adm-close-btn" onclick="logoutAdmin()" class="text-[10px] bg-white text-slate-600 px-3 py-1 rounded-lg border border-slate-200 shadow-sm font-bold">Tutup</button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label id="t-adm-eff-lbl" class="block text-[10px] font-bold text-slate-500 mb-1">Effisiensi SMPS (%)</label>
+                <input type="number" id="adm-eff" value="88" oninput="calculate()" class="w-full px-3 py-2 text-sm rounded-xl">
+              </div>
+              <div>
+                <label id="t-adm-pf-lbl" class="block text-[10px] font-bold text-slate-500 mb-1">Power Factor (Cos φ)</label>
+                <input type="number" id="adm-pf" value="0.95" step="0.01" oninput="calculate()" class="w-full px-3 py-2 text-sm rounded-xl">
+              </div>
+              <div>
+                <label id="t-adm-port-lbl" class="block text-[10px] font-bold text-slate-500 mb-1">Max Port Limit (Px)</label>
+                <input type="number" id="adm-port-cap" value="650000" oninput="calculate()" class="w-full px-3 py-2 text-sm rounded-xl">
+              </div>
+            </div>
+            <button id="t-adm-export-btn" type="button" onclick="openExportCodeModal()" class="w-full mt-3 py-2 bg-slate-800 text-cyan-300 rounded-xl text-[11px] font-bold shadow-md">💾 Ekspor Source HTML</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- SMART RATIO TAB -->
+    <div id="tab-ratio" class="hidden px-4 pb-32 w-full lg:max-w-3xl lg:mx-auto">
+      <div class="glass-card p-6 flex flex-col gap-5">
+        <div class="flex justify-center border-b border-slate-100 pb-4">
+            <h2 id="t-sr-title" class="text-base font-black text-cyan-700 uppercase tracking-widest flex items-center gap-2">
+                <span>⚡</span> Smart Ratio
+            </h2>
+        </div>
+
+        <div>
+            <label id="t-sr-pitch-lbl" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Pilih Pixel Pitch</label>
+            <select id="sr-pitch" class="w-full px-4 py-3.5 text-sm font-bold cursor-pointer border-none rounded-2xl shadow-sm bg-slate-50">
+                <!-- Otomatis diisi JS -->
+            </select>
+        </div>
+
+        <input type="hidden" id="sr-mw">
+        <input type="hidden" id="sr-mh">
+
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label id="t-sr-rw-lbl" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Rasio Lebar</label>
+                <input type="number" id="sr-rw" placeholder="Auto" class="w-full px-4 py-3.5 text-sm font-black text-cyan-700 text-center no-spinners rounded-2xl">
+            </div>
+            <div>
+                <label id="t-sr-rh-lbl" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Rasio Tinggi</label>
+                <input type="number" id="sr-rh" placeholder="Auto" class="w-full px-4 py-3.5 text-sm font-black text-cyan-700 text-center no-spinners rounded-2xl">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <label id="t-sr-pxw-lbl" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Lebar Target (px)</label>
+                <input type="number" id="sr-pxw" placeholder="Ketik..." class="w-full px-4 py-3.5 text-sm font-black text-slate-800 no-spinners rounded-2xl">
+            </div>
+            <div>
+                <label id="t-sr-pxh-lbl" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Tinggi (px)</label>
+                <input type="number" id="sr-pxh" placeholder="Ketik..." class="w-full px-4 py-3.5 text-sm font-black text-slate-800 no-spinners rounded-2xl">
+            </div>
+        </div>
+
+        <!-- Result Box -->
+        <div class="lcd-display rounded-2xl p-6 text-center shadow-sm">
+            <div id="t-sr-final-lbl" class="text-[10px] font-black text-cyan-600 mb-2 uppercase tracking-[0.2em]">Resolusi Final</div>
+            <div id="sr-out-res" class="text-3xl sm:text-4xl font-black text-slate-800 font-mono tracking-tight drop-shadow-sm">0 x 0</div>
+        </div>
+        
+        <button id="t-sr-reset-btn" type="button" onclick="resetSmartRatio()" class="w-full py-3 bg-white hover:bg-slate-50 text-slate-500 border border-slate-200 rounded-2xl text-xs font-bold flex items-center justify-center gap-2 shadow-sm uppercase tracking-wider transition-colors">
+            <span>🔄</span> Reset Parameter
+        </button>
+      </div>
+    </div>
+
+    <!-- FLOATING ACTION BUTTON (HARDWARE SWITCH STYLE) -->
+    <div id="main-bottom-actions" class="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-slate-100 via-slate-100/90 to-transparent pt-12 pb-5 px-4 pointer-events-none flex justify-center">
+      <div class="w-full max-w-xl pointer-events-auto mx-auto flex justify-center">
+        <button onclick="openAIModal()" class="w-full sm:max-w-md py-4 px-6 btn-ai-glow text-white font-black text-sm uppercase tracking-widest flex items-center justify-center gap-3">
+            <span class="text-xl">⚡</span> <span id="btn-ai-text">Mbong AI</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modals -->
+
+  <!-- Tab Help/Guide Modal (NEW) -->
+  <div id="help-modal" class="fixed inset-0 z-[70] bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-4 hidden" onclick="closeHelpModal()">
+    <div class="bg-white/95 backdrop-blur-xl border border-white w-full max-w-sm rounded-[2rem] p-6 space-y-4 shadow-2xl transform transition-transform" onclick="event.stopPropagation()">
+      <div class="flex justify-between border-b border-slate-100 pb-3">
+          <h3 id="help-modal-title" class="font-black text-slate-700 text-sm tracking-wider uppercase flex items-center gap-2"><span>❓</span> Bantuan</h3>
+          <button onclick="closeHelpModal()" class="text-slate-400 font-bold hover:text-cyan-500 transition-colors">✕</button>
+      </div>
+      <p id="help-modal-desc" class="text-sm font-medium text-slate-600 leading-relaxed text-justify py-2"></p>
+      <button id="help-modal-understand" onclick="closeHelpModal()" class="w-full py-3 bg-cyan-50 text-cyan-600 rounded-xl text-xs font-black uppercase tracking-wider shadow-sm hover:bg-cyan-100 transition-colors">Mengerti</button>
+    </div>
+  </div>
+
+  <!-- About/Subtitle Modal -->
+  <div id="about-modal" class="fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-4 hidden" onclick="closeAboutModal()">
+    <div class="bg-white/95 backdrop-blur-xl border border-white w-full max-w-sm rounded-[2rem] p-6 space-y-4 shadow-2xl transform transition-transform" onclick="event.stopPropagation()">
+      <div class="flex justify-between border-b border-slate-100 pb-3">
+          <h3 id="modal-about-title" class="font-black text-slate-700 text-sm tracking-wider uppercase flex items-center gap-2"><span>ℹ️</span> Info Aplikasi</h3>
+          <button onclick="closeAboutModal()" class="text-slate-400 font-bold hover:text-cyan-500 transition-colors">✕</button>
+      </div>
+      <p id="about-modal-text" class="text-sm font-bold text-slate-600 leading-relaxed text-center py-4"></p>
+      <button id="modal-about-close" onclick="closeAboutModal()" class="w-full py-3 bg-cyan-50 text-cyan-600 rounded-xl text-xs font-black uppercase tracking-wider shadow-sm hover:bg-cyan-100 transition-colors">Tutup</button>
+    </div>
+  </div>
+
+  <!-- Profile Modal -->
+  <div id="profile-modal" class="fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-md flex items-end sm:items-center justify-center hidden transition-opacity p-4 sm:p-0" onclick="closeProfileModal()">
+    <div class="modal-pcb-bg rounded-[2rem] p-8 w-full max-w-sm transform transition-transform shadow-2xl mb-4 sm:mb-0" onclick="event.stopPropagation()">
+      
+      <!-- Silkscreen Markings -->
+      <div class="pcb-silkscreen" style="top: 15px; left: 20px;">U1</div>
+      <div class="pcb-silkscreen" style="bottom: 110px; right: 20px;">U2</div>
+      <div class="pcb-silkscreen" style="top: 20px; right: 40px; transform: rotate(90deg);">C12</div>
+      <div class="pcb-silkscreen" style="bottom: 40px; left: 80px;">R45</div>
+      <div class="pcb-silkscreen" style="bottom: 20px; right: 20px;">REV 4.1</div>
+
+      <!-- Realstic IC Chips -->
+      <div class="ic-chip ic-vertical w-12 h-16 top-8 left-8">
+        <div class="pins-left"></div><div class="pins-right"></div>
+        <div class="ic-dot top-2 left-2"></div>
+        <div class="ic-text vert">XC7A35T<br>FGG484</div>
+      </div>
+      
+      <div class="ic-chip ic-horizontal w-16 h-10 bottom-32 right-8">
+        <div class="pins-top"></div><div class="pins-bottom"></div>
+        <div class="ic-dot bottom-2 left-2"></div>
+        <div class="ic-text">M328P<br>AU2021</div>
+      </div>
+      
+      <div class="ic-chip ic-vertical w-8 h-10 bottom-12 left-12">
+        <div class="pins-left"></div><div class="pins-right"></div>
+        <div class="ic-dot top-1.5 left-1.5 w-2 h-2"></div>
+        <div class="ic-text vert">LDO</div>
+      </div>
+
+      <!-- SMD Resistors & Capacitors -->
+      <div class="smd-comp top-20 right-12"></div>
+      <div class="smd-comp smd-h top-24 right-16"></div>
+      <div class="smd-comp smd-cap smd-h bottom-20 left-24"></div>
+      <div class="smd-comp smd-cap bottom-24 left-32"></div>
+      <div class="smd-comp top-10 right-32"></div>
+
+      <!-- Main Content Container -->
+      <div class="relative z-10 flex flex-col items-center space-y-5 w-full bg-slate-900/40 p-6 rounded-3xl backdrop-blur-sm border border-slate-700/50 shadow-xl mt-4">
+        <h3 id="t-prof-title" class="text-xs font-black text-emerald-400 tracking-widest drop-shadow-md">⚙️ PROFIL KONSULTAN</h3>
+        <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-[4px] border-emerald-500 shadow-[0_0_20px_rgba(52,211,153,0.5)] bg-emerald-950 p-1">
+          <img id="modal-profile-img" src="https://lh3.googleusercontent.com/d/10uMkYanCm9dP1hFS6FOVtvlZYi4oFhpV" class="w-full h-full object-cover rounded-full">
+        </div>
+        <div class="text-center space-y-1">
+          <h4 class="text-2xl font-black text-white drop-shadow-lg">Bang Mbong</h4>
+          <p id="t-prof-desc" class="text-[10px] text-emerald-200 font-bold uppercase tracking-widest">Videotron Engineer</p>
+        </div>
+        
+        <a href="https://wa.me/628158855537?text=Halo%20Bang%20Mbong,%20ada%20yang%20mau%20saya%20konsultasikan%20mengenai%20videotron" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-4 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all mt-2">
+          <span class="text-lg">💬</span> <span id="t-prof-wa">Hubungi WhatsApp</span>
+        </a>
+
+        <button onclick="closeProfileModal()" id="t-prof-close" class="text-emerald-950 text-xs px-4 py-3 bg-gradient-to-r from-emerald-400 to-green-500 hover:from-emerald-300 hover:to-green-400 rounded-xl w-full font-black uppercase tracking-widest shadow-[0_0_15px_rgba(52,211,153,0.4)] transition-all mt-1">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Modal -->
+  <div id="admin-modal" class="fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-white/95 backdrop-blur-xl border border-white w-full max-w-xs rounded-[2rem] p-6 space-y-5 shadow-2xl">
+      <div class="flex justify-between border-b border-slate-100 pb-3">
+          <h3 id="modal-admin-title" class="font-black text-slate-700 text-sm tracking-wider uppercase">Login Admin</h3>
+          <button onclick="closeAdminModal()" class="text-slate-400 font-bold">✕</button>
+      </div>
+      <input type="password" id="admin-password-input" placeholder="Password..." class="w-full rounded-2xl px-4 py-3.5 text-sm text-center font-bold tracking-[0.2em] bg-slate-50 border-none focus:ring-2 focus:ring-cyan-400" onkeyup="if(event.key==='Enter') { verifyAdminLogin(); this.blur(); }">
+      <p id="admin-error-msg" class="text-[10px] font-bold text-amber-500 hidden text-center">Password Salah!</p>
+      <div class="flex gap-3">
+          <button id="modal-admin-cancel" onclick="closeAdminModal()" class="flex-1 py-3 bg-slate-100 text-slate-600 rounded-xl text-xs font-bold">Batal</button>
+          <button id="modal-admin-login" onclick="verifyAdminLogin()" class="flex-1 py-3 bg-cyan-600 text-white rounded-xl text-xs font-black shadow-md">Masuk</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Code Modal -->
+  <div id="export-code-modal" class="fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="bg-white/95 backdrop-blur-xl border border-white w-full max-w-md rounded-[2rem] p-6 flex flex-col max-h-[85vh] shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-4 mb-4">
+          <h3 id="modal-export-title" class="font-black text-slate-700 text-xs uppercase tracking-widest">Export Source</h3>
+          <button onclick="closeExportCodeModal()" class="text-slate-400 font-bold text-lg">✕</button>
+      </div>
+      <textarea id="export-code-area" readonly="" class="w-full flex-1 bg-slate-50 border border-slate-200 rounded-2xl p-4 font-mono text-[10px] text-slate-600 focus:outline-none min-h-[250px]"></textarea>
+      <div class="flex gap-3 mt-4">
+          <button id="modal-export-copy" onclick="copySourceCode()" class="flex-1 py-3 bg-slate-100 text-slate-600 rounded-xl text-[10px] font-black uppercase tracking-wider">Copy</button>
+          <button id="modal-export-down" onclick="downloadHTMLFile()" class="flex-1 py-3 bg-cyan-600 text-white rounded-xl text-[10px] font-black shadow-md uppercase tracking-wider">Download</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WA Modal -->
+  <div id="wa-modal" class="fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-white/95 backdrop-blur-xl border border-white w-full max-w-sm rounded-[2rem] p-6 space-y-5 shadow-2xl">
+      <div class="flex justify-between border-b border-slate-100 pb-3">
+          <h3 id="modal-wa-title" class="font-black text-slate-700 text-sm uppercase tracking-wider">Kirim via WA</h3>
+          <button onclick="closeWhatsAppModal()" class="text-slate-400 font-bold">✕</button>
+      </div>
+      <button id="modal-wa-app" onclick="sendWhatsAppShare()" class="w-full py-4 bg-cyan-50 text-xs font-black text-cyan-600 rounded-2xl uppercase tracking-wide">
+          Buka App WhatsApp ➔
+      </button>
+      <div class="relative flex items-center">
+        <div class="flex-grow border-t border-slate-100"></div>
+        <span id="modal-wa-or" class="flex-shrink-0 mx-3 text-slate-400 text-[9px] font-bold uppercase tracking-widest">Atau Nomor Custom</span>
+        <div class="flex-grow border-t border-slate-100"></div>
+      </div>
+      <div class="flex gap-2">
+          <input type="tel" id="custom-wa-phone" placeholder="0812xxxx" onkeyup="if(event.key==='Enter') this.blur();" class="w-full rounded-xl px-4 py-3 text-sm font-bold bg-slate-50 border-none focus:ring-2 focus:ring-cyan-400">
+          <button id="modal-wa-send" onclick="sendWhatsAppDirect()" class="px-5 py-3 bg-cyan-600 text-white rounded-xl text-xs font-black shadow-md">Kirim</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Modal -->
+  <div id="ai-modal" class="fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-xl flex items-end sm:items-center justify-center p-4 sm:p-0 hidden" onclick="closeAIModal()">
+    <div class="bg-slate-900/90 backdrop-blur-2xl border border-cyan-800/50 rounded-[2rem] p-6 w-full max-w-2xl flex flex-col space-y-5 shadow-[0_0_50px_rgba(14,165,233,0.15)] mb-4 sm:mb-0" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between border-b border-slate-700/50 pb-4">
+        <h3 id="modal-ai-title" class="text-sm font-black text-cyan-400 uppercase tracking-widest flex items-center gap-2">
+          <span class="text-xl">⚡</span> Mbong AI Engine
+        </h3>
+        <button onclick="closeAIModal()" class="text-slate-500 hover:text-cyan-400 text-lg transition-colors">✕</button>
+      </div>
+      <div class="min-h-[150px] max-h-[50vh] overflow-y-auto bg-slate-950/80 p-5 rounded-2xl text-[12px] text-cyan-50 font-mono shadow-inner border border-slate-800/50 leading-relaxed">
+        <span id="ai-text"></span><span id="ai-cursor" class="ai-cursor"></span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
+        <button id="modal-ai-copy" onclick="copyAIText()" class="py-3.5 bg-slate-800/80 text-cyan-200 rounded-xl text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-slate-700 transition-colors"><span class="text-sm">📋</span> Copy</button>
+        <button id="modal-ai-fw" onclick="sendAIWhatsAppShare()" class="py-3.5 bg-gradient-to-r from-cyan-700 to-blue-600 text-white rounded-xl text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-shadow"><span class="text-sm">📲</span> Forward WA</button>
+        <button id="modal-ai-close" onclick="closeAIModal()" class="py-3.5 bg-slate-800/50 text-slate-400 rounded-xl text-[11px] font-bold uppercase tracking-wider flex items-center justify-center hover:bg-slate-700 transition-colors">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // ==========================================
+    // DICTIONARY LENGKAP UNTUK MULTI-BAHASA
+    // ==========================================
+    const DICTIONARY = {
+      id: {
+        subtitle: "Sistem Kalkulasi Resolusi, Video Processor & Rekayasa Daya Videotron V4.1",
+        dim_title: "Dimensi & Modul",
+        pitch_label: "Pixel Pitch & Tipe Modul",
+        cabinet_label: "Pixel Pitch & Tipe Kabinet",
+        opt_cab_640: "Kabinet 640x640",
+        opt_cab_960: "Kabinet 960x960",
+        opt_cab_custom: "Tanpa Kabinet / Custom",
+        width_label: "Lebar Layar (Target)",
+        height_label: "Tinggi Layar (Target)",
+        matrix: "Matriks Modul:",
+        actual_size: "Fisik Aktual:",
+        area: "Luas Area:",
+        res_title: "Resolusi & Rasio",
+        native_res: "Resolusi Penuh",
+        total_px: "Total:",
+        exact_ratio: "Rasio Aktual:",
+        ratio_status: "Kecocokan:",
+        proc_title: "Controller Pro",
+        main_lbl: "Tipe Utama:",
+        spec_lbl: "Batas HW:",
+        alt_lbl: "Alternatif:",
+        rc_lbl: "Rec. RC:",
+        ports: "Kebutuhan Ethernet:",
+        port_note: "",
+        elec_title: "Kelistrikan",
+        power_max: "Max Power",
+        power_avg: "Avg Power (~33% Video)",
+        p1_head: "🔌 1 Fasa (220V)",
+        p3_head: "⚡ 3 Fasa (380V)",
+        cur: "Arus Nyata (Ib):",
+        cur3: "Arus/Fasa (Ib):",
+        mcb: "MCB:",
+        cable: "Kabel Utama:",
+        genset: "Genset Min (80%):",
+        area_watt: "Beban per m²: ",
+        apparent: "Apparent Power: ",
+        prof_title: "⚙️ PROFIL KONSULTAN",
+        prof_desc: "Videotron Engineer",
+        prof_wa: "Hubungi WhatsApp",
+        prof_close: "Tutup",
+        tab_main: "Kalkulator Utama",
+        tab_ratio: "Smart Ratio",
+        sr_title: "Smart Ratio",
+        sr_pitch: "Pilih Pixel Pitch",
+        sr_rw: "Rasio Lebar",
+        sr_rh: "Rasio Tinggi",
+        sr_pxw: "Lebar Target (px)",
+        sr_pxh: "Tinggi (px)",
+        sr_final: "Resolusi Final",
+        sr_reset: "Reset Parameter",
+        placeholder_auto: "Auto",
+        placeholder_type: "Ketik...",
+        help_main_title: "Bantuan: Kalkulator Utama",
+        help_main_desc: "Gunakan tab ini untuk menghitung kebutuhan dasar videotron Anda. Masukkan dimensi layar dan jenis modul (Pixel Pitch) untuk mengetahui resolusi, matriks modul, rekomendasi spesifikasi Controller, dan batas aman kelistrikan.",
+        help_ratio_title: "Bantuan: Smart Ratio",
+        help_ratio_desc: "Tab ini membantu menemukan dimensi videotron yang presisi berdasarkan rasio aspek (misal 16:9). Masukkan target piksel atau rasio, dan biarkan sistem menghitung proporsi modul yang paling mendekati tanpa merusak rasio asli.",
+        help_dim_title: "Bantuan: Dimensi & Modul",
+        help_dim_desc: "Pilih ukuran pixel pitch dan target dimensi layar Anda. Modul akan dibulatkan ke jumlah terdekat (Matriks Modul) untuk memastikan ukuran fisik videotron yang presisi dan tidak terpotong.",
+        help_res_title: "Bantuan: Resolusi & Rasio",
+        help_res_desc: "Melihat total resolusi pixel murni dari ukuran fisik yang terbentuk. Pastikan tim konten/desain Anda membuat video atau gambar dengan ukuran resolusi ini (Rasio Aktual) agar gambar tidak distorsi/gepeng.",
+        help_proc_title: "Bantuan: Controller Pro",
+        help_proc_desc: "Memberikan rekomendasi spesifikasi Video Processor/Controller minimum dari brand Novastar atau Huidu. Perhatikan batas kemampuan beban hardware (Load) dan ketersediaan jumlah lubang kabel LAN (Ethernet/RJ45).",
+        help_elec_title: "Bantuan: Kelistrikan",
+        help_elec_desc: "Menampilkan analisis kebutuhan daya listrik (Max saat layar full putih, Avg saat video normal). Pastikan mengikuti saran penggunaan jenis fasa (1 Phase atau 3 Phase), ukuran MCB, dan ukuran kabel untuk menghindari korsleting/kebakaran.",
+        
+        opt_mm: "Milimeter",
+        opt_cm: "Centimeter",
+        opt_m: "Meter",
+        btn_ai: "Mbong AI",
+        admin_panel_title: "⚙️ Admin Panel",
+        admin_eff: "Effisiensi SMPS (%)",
+        admin_pf: "Power Factor (Cos φ)",
+        admin_port: "Max Port Limit (Px)",
+        admin_export: "💾 Ekspor Source HTML",
+        admin_close: "Tutup",
+        modal_admin_title: "Login Admin",
+        modal_admin_pass: "Password...",
+        modal_admin_cancel: "Batal",
+        modal_admin_login: "Masuk",
+        modal_admin_err: "Password Salah!",
+        modal_export_title: "Export Source",
+        modal_export_copy: "Copy",
+        modal_export_down: "Download",
+        modal_wa_title: "Kirim via WA",
+        modal_wa_app: "Buka App WhatsApp ➔",
+        modal_wa_or: "Atau Nomor Custom",
+        modal_wa_send: "Kirim",
+        modal_ai_title: "⚡ Mbong AI Engine",
+        modal_ai_copy: "📋 Copy",
+        modal_ai_fw: "📲 Forward WA",
+        modal_ai_close: "Tutup",
+        modal_about_title: "ℹ️ Info Aplikasi",
+        modal_about_close: "Tutup",
+        help_understand: "Mengerti",
+        tooltip_help: "Bantuan",
+        admin_granted: "Akses Admin diberikan."
+      },
+      en: {
+        subtitle: "Resolution, Processor & Power Engineering V4.1",
+        dim_title: "Dimensions",
+        pitch_label: "Pixel Pitch & Module Type",
+        cabinet_label: "Pixel Pitch & Cabinet Type",
+        opt_cab_640: "640x640 Cabinet",
+        opt_cab_960: "960x960 Cabinet",
+        opt_cab_custom: "No Cabinet / Custom",
+        width_label: "Target Width",
+        height_label: "Target Height",
+        matrix: "Module Matrix:",
+        actual_size: "Actual Size:",
+        area: "Surface Area:",
+        res_title: "Resolution & Ratio",
+        native_res: "Native Resolution",
+        total_px: "Total:",
+        exact_ratio: "Exact Ratio:",
+        ratio_status: "Match:",
+        proc_title: "Controller Pro",
+        main_lbl: "Main Type:",
+        spec_lbl: "HW Limit:",
+        alt_lbl: "Alternative:",
+        rc_lbl: "Rec. RC:",
+        ports: "Ethernet Needed:",
+        port_note: "",
+        elec_title: "Power System",
+        power_max: "Max Power",
+        power_avg: "Avg Power (~33% Video)",
+        p1_head: "🔌 1 Phase (220V)",
+        p3_head: "⚡ 3 Phase (380V)",
+        cur: "Actual Load (Ib):",
+        cur3: "Current/Phase (Ib):",
+        mcb: "Recommended MCB:",
+        cable: "Main Cable:",
+        genset: "Min Genset (80%):",
+        area_watt: "Load per m²: ",
+        apparent: "Apparent Power: ",
+        prof_title: "⚙️ CONSULTANT PROFILE",
+        prof_desc: "Videotron Engineer",
+        prof_wa: "Contact WhatsApp",
+        prof_close: "Close",
+        tab_main: "Main Calculator",
+        tab_ratio: "Smart Ratio",
+        sr_title: "Smart Ratio",
+        sr_pitch: "Select Pixel Pitch",
+        sr_rw: "Width Ratio",
+        sr_rh: "Height Ratio",
+        sr_pxw: "Target Width (px)",
+        sr_pxh: "Height (px)",
+        sr_final: "Final Resolution",
+        sr_reset: "Reset Parameters",
+        placeholder_auto: "Auto",
+        placeholder_type: "Type...",
+        help_main_title: "Help: Main Calculator",
+        help_main_desc: "Use this tab to calculate basic videotron requirements. Enter screen dimensions and module type (Pixel Pitch) to determine resolution, module matrix, recommended Controller specs, and safe power configurations.",
+        help_ratio_title: "Help: Smart Ratio",
+        help_ratio_desc: "This tab helps find precise videotron dimensions based on an aspect ratio (e.g., 16:9). Enter target pixels or ratios, and the system will calculate the closest module proportion to maintain the aspect ratio.",
+        help_dim_title: "Help: Dimensions & Module",
+        help_dim_desc: "Select pixel pitch and target screen dimensions. Modules will be rounded to the nearest whole matrix to ensure a precise physical videotron size without partial cabinets.",
+        help_res_title: "Help: Resolution & Ratio",
+        help_res_desc: "Displays the exact native pixel resolution. Ensure your content/design team creates videos or images using this precise resolution (Exact Ratio) so visuals won't stretch or distort.",
+        help_proc_title: "Help: Controller Pro",
+        help_proc_desc: "Provides minimum recommended Video Processor/Controller specs from Novastar or Huidu. Pay attention to hardware load limits and the required number of LAN (Ethernet/RJ45) ports.",
+        help_elec_title: "Help: Power System",
+        help_elec_desc: "Analyzes power requirements (Max at full white, Avg during normal video). Strictly follow the suggested phase type (1-Phase or 3-Phase), MCB rating, and cable size to prevent short circuits or fire hazards.",
+        
+        opt_mm: "Millimeter",
+        opt_cm: "Centimeter",
+        opt_m: "Meter",
+        btn_ai: "Mbong AI",
+        admin_panel_title: "⚙️ Admin Panel",
+        admin_eff: "SMPS Efficiency (%)",
+        admin_pf: "Power Factor (Cos φ)",
+        admin_port: "Max Port Limit (Px)",
+        admin_export: "💾 Export Source HTML",
+        admin_close: "Close",
+        modal_admin_title: "Admin Login",
+        modal_admin_pass: "Password...",
+        modal_admin_cancel: "Cancel",
+        modal_admin_login: "Login",
+        modal_admin_err: "Wrong Password!",
+        modal_export_title: "Export Source",
+        modal_export_copy: "Copy",
+        modal_export_down: "Download",
+        modal_wa_title: "Send via WA",
+        modal_wa_app: "Open WhatsApp App ➔",
+        modal_wa_or: "Or Custom Number",
+        modal_wa_send: "Send",
+        modal_ai_title: "⚡ Mbong AI Engine",
+        modal_ai_copy: "📋 Copy",
+        modal_ai_fw: "📲 Forward WA",
+        modal_ai_close: "Close",
+        modal_about_title: "ℹ️ App Info",
+        modal_about_close: "Close",
+        help_understand: "Understood",
+        tooltip_help: "Help",
+        admin_granted: "Admin access granted."
+      },
+      zh: {
+        subtitle: "LED屏幕分辨率、视频处理器与电力计算 V4.1",
+        dim_title: "尺寸与模组",
+        pitch_label: "像素间距",
+        cabinet_label: "像素间距与箱体类型",
+        opt_cab_640: "640x640 箱体",
+        opt_cab_960: "960x960 箱体",
+        opt_cab_custom: "无箱体 / 自定义",
+        width_label: "目标宽度",
+        height_label: "目标高度",
+        matrix: "模组矩阵:",
+        actual_size: "实际尺寸:",
+        area: "面积:",
+        res_title: "分辨率与比例",
+        native_res: "原生分辨率",
+        total_px: "总数:",
+        exact_ratio: "数学比例:",
+        ratio_status: "兼容性:",
+        proc_title: "控制器推荐",
+        main_lbl: "主控制器:",
+        spec_lbl: "硬件限制:",
+        alt_lbl: "替代方案:",
+        rc_lbl: "推荐接收卡:",
+        ports: "以太网需求:",
+        port_note: "",
+        elec_title: "电力计算",
+        power_max: "最大功率",
+        power_avg: "平均功率 (~33%视频)",
+        p1_head: "🔌 单相 (220V)",
+        p3_head: "⚡ 三相 (380V)",
+        cur: "负载电流 (Ib):",
+        cur3: "每相电流 (Ib):",
+        mcb: "断路器 (MCB):",
+        cable: "主电缆:",
+        genset: "最低发电机 (80%):",
+        area_watt: "每平米负荷: ",
+        apparent: "视在功率: ",
+        prof_title: "⚙️ 顾问简介",
+        prof_desc: "LED工程师",
+        prof_wa: "WhatsApp联系",
+        prof_close: "关闭",
+        tab_main: "主计算器",
+        tab_ratio: "智能比例",
+        sr_title: "智能比例",
+        sr_pitch: "选择像素间距",
+        sr_rw: "宽度比例",
+        sr_rh: "高度比例",
+        sr_pxw: "目标宽度 (px)",
+        sr_pxh: "高度 (px)",
+        sr_final: "最终分辨率",
+        sr_reset: "重置参数",
+        placeholder_auto: "自动",
+        placeholder_type: "输入...",
+        help_main_title: "帮助：主计算器",
+        help_main_desc: "使用此选项卡计算基本的LED屏幕需求。输入屏幕尺寸和模组类型（像素间距），系统将为您计算分辨率、模组矩阵、推荐的控制器规格以及安全的电力配置。",
+        help_ratio_title: "帮助：智能比例",
+        help_ratio_desc: "此选项卡可帮助您根据宽高比（例如 16:9）找到精确的屏幕尺寸。输入目标像素或比例，系统将计算出最接近的模组比例，以保持画面不失真。",
+        help_dim_title: "帮助：尺寸与模组",
+        help_dim_desc: "选择像素间距和目标屏幕尺寸。系统将自动计算最接近的完整模组矩阵，以确保LED屏幕物理尺寸精准且无裁切。",
+        help_res_title: "帮助：分辨率与比例",
+        help_res_desc: "显示精确的原生像素分辨率。请务必让内容设计团队使用此分辨率（准确比例）制作视频或图像，以免画面被拉伸变形。",
+        help_proc_title: "帮助：控制器推荐",
+        help_proc_desc: "提供诺瓦(Novastar)或灰度(Huidu)的最低推荐视频处理器规格。请注意硬件负载限制和所需的网线(LAN/RJ45)端口数量。",
+        help_elec_title: "帮助：电力计算",
+        help_elec_desc: "分析功耗需求（全白画面为最大功率，正常视频为平均功率）。请务必遵循建议的相位类型（单相或三相）、断路器容量(MCB)和主电缆规格，防止短路或火灾危险。",
+        
+        opt_mm: "毫米",
+        opt_cm: "厘米",
+        opt_m: "米",
+        btn_ai: "Mbong AI",
+        admin_panel_title: "⚙️ 管理面板",
+        admin_eff: "电源效率 (%)",
+        admin_pf: "功率因数 (Cos φ)",
+        admin_port: "最大端口限制 (Px)",
+        admin_export: "💾 导出 HTML 源码",
+        admin_close: "关闭",
+        modal_admin_title: "管理员登录",
+        modal_admin_pass: "密码...",
+        modal_admin_cancel: "取消",
+        modal_admin_login: "登录",
+        modal_admin_err: "密码错误！",
+        modal_export_title: "导出源码",
+        modal_export_copy: "复制",
+        modal_export_down: "下载",
+        modal_wa_title: "通过 WA 发送",
+        modal_wa_app: "打开 WhatsApp 应用 ➔",
+        modal_wa_or: "或自定义号码",
+        modal_wa_send: "发送",
+        modal_ai_title: "⚡ Mbong AI 引擎",
+        modal_ai_copy: "📋 复制",
+        modal_ai_fw: "📲 转发 WA",
+        modal_ai_close: "关闭",
+        modal_about_title: "ℹ️ 应用信息",
+        modal_about_close: "关闭",
+        help_understand: "明白",
+        tooltip_help: "帮助",
+        admin_granted: "管理员权限已授予。"
+      }
+    };
+
+    // ==========================================
+    // LOGIKA TAB SYSTEM
+    // ==========================================
+    function switchTab(tabId) {
+      const mainTab = document.getElementById('tab-main');
+      const ratioTab = document.getElementById('tab-ratio');
+      const btnMain = document.getElementById('btn-tab-main');
+      const btnRatio = document.getElementById('btn-tab-ratio');
+      const bottomActions = document.getElementById('main-bottom-actions');
+
+      if (tabId === 'main') {
+        mainTab.classList.remove('hidden');
+        ratioTab.classList.add('hidden');
+        bottomActions.classList.replace('hidden', 'flex'); 
+        
+        btnMain.className = "flex-1 py-3 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-cyan-600 to-blue-500 text-white shadow-md transition-all flex items-center justify-center gap-1.5";
+        btnRatio.className = "flex-1 py-3 rounded-xl text-xs sm:text-sm font-bold text-slate-500 hover:text-cyan-600 transition-all flex items-center justify-center gap-1.5";
+      } else {
+        mainTab.classList.add('hidden');
+        ratioTab.classList.remove('hidden');
+        bottomActions.classList.replace('flex', 'hidden');
+        
+        btnRatio.className = "flex-1 py-3 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-cyan-600 to-blue-500 text-white shadow-md transition-all flex items-center justify-center gap-1.5";
+        btnMain.className = "flex-1 py-3 rounded-xl text-xs sm:text-sm font-bold text-slate-500 hover:text-cyan-600 transition-all flex items-center justify-center gap-1.5";
+      }
+    }
+
+    // ==========================================
+    // LOGIKA BANTUAN TAB (MODAL HELP)
+    // ==========================================
+    function openHelpModal(tab, e) {
+        if(e) e.stopPropagation();
+        
+        const dict = DICTIONARY[currentLang] || DICTIONARY.id;
+        let title = '';
+        let desc = '';
+        
+        if(tab === 'main') {
+            title = dict.help_main_title;
+            desc = dict.help_main_desc;
+        } else if (tab === 'ratio') {
+            title = dict.help_ratio_title;
+            desc = dict.help_ratio_desc;
+        } else if (tab === 'dim') {
+            title = dict.help_dim_title;
+            desc = dict.help_dim_desc;
+        } else if (tab === 'res') {
+            title = dict.help_res_title;
+            desc = dict.help_res_desc;
+        } else if (tab === 'proc') {
+            title = dict.help_proc_title;
+            desc = dict.help_proc_desc;
+        } else if (tab === 'elec') {
+            title = dict.help_elec_title;
+            desc = dict.help_elec_desc;
+        }
+        
+        document.getElementById('help-modal-title').innerHTML = `<span>❓</span> ${title}`;
+        document.getElementById('help-modal-desc').innerText = desc;
+        document.getElementById('help-modal').classList.remove('hidden');
+    }
+    
+    function closeHelpModal() {
+        document.getElementById('help-modal').classList.add('hidden');
+    }
+
+    // ==========================================
+    // LOGIKA UTAMA (MBONG CALCULATOR PRO)
+    // ==========================================
+    let currentLang = 'id';
+    let currentUnit = 'cm';
+    let isAdmin = false;
+    let aiTypingTimeout = null;
+    let currentAITextRaw = "";
+
+    const LED_MODULE_DATABASE = {
+      "0.9":      { widthMm: 320, heightMm: 160, pixelW: 356, pixelH: 178, maxWattsDC: 32.0, avgWattsDC: 12.8, type: 'indoor' },
+      "1.25":     { widthMm: 320, heightMm: 160, pixelW: 256, pixelH: 128, maxWattsDC: 28.0, avgWattsDC: 10.6, type: 'indoor' },
+      "1.538":    { widthMm: 320, heightMm: 160, pixelW: 208, pixelH: 104, maxWattsDC: 26.0, avgWattsDC: 9.8, type: 'indoor' },
+      "1.86":     { widthMm: 320, heightMm: 160, pixelW: 172, pixelH: 86,  maxWattsDC: 24.0, avgWattsDC: 9.1, type: 'indoor' },
+      "2.0":      { widthMm: 320, heightMm: 160, pixelW: 160, pixelH: 80,  maxWattsDC: 22.0, avgWattsDC: 7.5, type: 'indoor' },
+      "2.5":      { widthMm: 320, heightMm: 160, pixelW: 128, pixelH: 64,  maxWattsDC: 20.0, avgWattsDC: 6.6, type: 'indoor' },
+      "2.604":    { widthMm: 250, heightMm: 250, pixelW: 96,  pixelH: 96,  maxWattsDC: 30.0, avgWattsDC: 10.0, type: 'indoor' },
+      "2.976":    { widthMm: 500, heightMm: 500, pixelW: 168, pixelH: 168, maxWattsDC: 125.0, avgWattsDC: 41.5, type: 'indoor' }, 
+      "3.076-in": { widthMm: 320, heightMm: 160, pixelW: 104, pixelH: 52,  maxWattsDC: 18.0, avgWattsDC: 6.0, type: 'indoor' },
+      "3.076-out":{ widthMm: 320, heightMm: 160, pixelW: 104, pixelH: 52,  maxWattsDC: 42.0, avgWattsDC: 16.8, type: 'outdoor' },
+      "3.91-in":  { widthMm: 500, heightMm: 500, pixelW: 128, pixelH: 128, maxWattsDC: 130.0, avgWattsDC: 43.0, type: 'indoor' },
+      "3.91-out": { widthMm: 500, heightMm: 500, pixelW: 128, pixelH: 128, maxWattsDC: 220.0, avgWattsDC: 88.0, type: 'outdoor' },
+      "4.0-in":   { widthMm: 320, heightMm: 160, pixelW: 80,  pixelH: 40,  maxWattsDC: 16.0, avgWattsDC: 5.3, type: 'indoor' },
+      "4.0-out":  { widthMm: 320, heightMm: 160, pixelW: 80,  pixelH: 40,  maxWattsDC: 45.0, avgWattsDC: 18.0, type: 'outdoor' },
+      "5.0-in":   { widthMm: 320, heightMm: 160, pixelW: 64,  pixelH: 32,  maxWattsDC: 15.0, avgWattsDC: 5.0, type: 'indoor' },
+      "5.0-out":  { widthMm: 320, heightMm: 160, pixelW: 64,  pixelH: 32,  maxWattsDC: 48.0, avgWattsDC: 19.2, type: 'outdoor' },
+      "6.0":      { widthMm: 192, heightMm: 192, pixelW: 32,  pixelH: 32,  maxWattsDC: 35.0, avgWattsDC: 14.0, type: 'outdoor' },
+      "6.67":     { widthMm: 480, heightMm: 320, pixelW: 72,  pixelH: 48,  maxWattsDC: 135.0, avgWattsDC: 54.0, type: 'outdoor' },
+      "8.0-out":  { widthMm: 320, heightMm: 160, pixelW: 40,  pixelH: 20,  maxWattsDC: 45.0, avgWattsDC: 18.0, type: 'outdoor' },
+      "10.0-out": { widthMm: 320, heightMm: 160, pixelW: 32,  pixelH: 16,  maxWattsDC: 42.0, avgWattsDC: 16.8, type: 'outdoor' }
+    };
+
+    const MODULE_NAMES = {
+      id: {
+        "0.9": "P0.9 - Micro LED / CoB Ultra HD (Indoor, 320×160mm)",
+        "1.25": "P1.25 - Ultra Fine HD (Indoor, 320×160mm)",
+        "1.538": "P1.538 - Ultra Fine (Indoor, 320×160mm)",
+        "1.86": "P1.86 - Command Center (Indoor, 320×160mm)",
+        "2.0": "P2.0 - High Definition (Indoor, 320×160mm)",
+        "2.5": "P2.5 - Standar Auditorium (Indoor, 320×160mm)",
+        "2.604": "P2.604 - Rental / Stage Indoor (250×250mm)",
+        "2.976": "P2.976 - Standar Rental Event (500×500mm)",
+        "3.076-in": "P3.076 - Ballroom & Hall (Indoor, 320×160mm)",
+        "3.076-out": "P3.076 - High Brightness (Outdoor, 320×160mm)",
+        "3.91-in": "P3.91 - Rental Event (Indoor, 500×500mm)",
+        "3.91-out": "P3.91 - Rental Panggung (Outdoor, 500×500mm)",
+        "4.0-in": "P4.0 - Hall & Semi-Indoor (Indoor, 320×160mm)",
+        "4.0-out": "P4.0 - Videotron Reklame (Outdoor, 320×160mm)",
+        "5.0-in": "P5.0 - Large Hall / Gedung (Indoor, 320×160mm)",
+        "5.0-out": "P5.0 - Standar Billboard (Outdoor, 320×160mm)",
+        "6.0": "P6.0 - Outdoor Jarak Jauh (192×192mm)",
+        "6.67": "P6.67 - Outdoor Jarak Sedang (480×320mm)",
+        "8.0-out": "P8.0 - Billboard Raksasa (Outdoor, 320×160mm)",
+        "10.0-out": "P10.0 - Billboard Jarak Jauh (Outdoor, 320×160mm)"
+      },
+      en: {
+        "0.9": "P0.9 - Micro LED / CoB Ultra HD (Indoor, 320×160mm)",
+        "1.25": "P1.25 - Ultra Fine HD (Indoor, 320×160mm)",
+        "1.538": "P1.538 - Ultra Fine (Indoor, 320×160mm)",
+        "1.86": "P1.86 - Command Center (Indoor, 320×160mm)",
+        "2.0": "P2.0 - High Definition (Indoor, 320×160mm)",
+        "2.5": "P2.5 - Standard Auditorium (Indoor, 320×160mm)",
+        "2.604": "P2.604 - Rental / Stage Indoor (250×250mm)",
+        "2.976": "P2.976 - Standard Rental Event (500×500mm)",
+        "3.076-in": "P3.076 - Ballroom & Hall (Indoor, 320×160mm)",
+        "3.076-out": "P3.076 - High Brightness (Outdoor, 320×160mm)",
+        "3.91-in": "P3.91 - Event Rental (Indoor, 500×500mm)",
+        "3.91-out": "P3.91 - Stage Rental (Outdoor, 500×500mm)",
+        "4.0-in": "P4.0 - Hall & Semi-Indoor (Indoor, 320×160mm)",
+        "4.0-out": "P4.0 - Billboard Display (Outdoor, 320×160mm)",
+        "5.0-in": "P5.0 - Large Hall (Indoor, 320×160mm)",
+        "5.0-out": "P5.0 - Standard Billboard (Outdoor, 320×160mm)",
+        "6.0": "P6.0 - Long Range Outdoor (192×192mm)",
+        "6.67": "P6.67 - Medium Range Outdoor (480×320mm)",
+        "8.0-out": "P8.0 - Giant Billboard (Outdoor, 320×160mm)",
+        "10.0-out": "P10.0 - Long Distance Billboard (Outdoor, 320×160mm)"
+      },
+      zh: {
+        "0.9": "P0.9 - 微间距CoB超高清 (室内, 320×160mm)",
+        "1.25": "P1.25 - 超微高清 (室内, 320×160mm)",
+        "1.538": "P1.538 - 超高清 (室内, 320×160mm)",
+        "1.86": "P1.86 - 指控中心 (室内, 320×160mm)",
+        "2.0": "P2.0 - 高清显示 (室内, 320×160mm)",
+        "2.5": "P2.5 - 礼堂标准 (室内, 320×160mm)",
+        "2.604": "P2.604 - 租赁舞台 (室内, 250×250mm)",
+        "2.976": "P2.976 - 标准租赁 (室内, 500×500mm)",
+        "3.076-in": "P3.076 - 宴会厅 (室内, 320×160mm)",
+        "3.076-out": "P3.076 - 高亮全彩 (户外, 320×160mm)",
+        "3.91-in": "P3.91 - 活动租赁 (室内, 500×500mm)",
+        "3.91-out": "P3.91 - 舞台租赁 (户外, 500×500mm)",
+        "4.0-in": "P4.0 - 半室内 (室内, 320×160mm)",
+        "4.0-out": "P4.0 - 广告屏 (户外, 320×160mm)",
+        "5.0-in": "P5.0 - 大型展厅 (室内, 320×160mm)",
+        "5.0-out": "P5.0 - 标准广告牌 (户外, 320×160mm)",
+        "6.0": "P6.0 - 远距离户外 (192×192mm)",
+        "6.67": "P6.67 - 中距户外 (480×320mm)",
+        "8.0-out": "P8.0 - 巨型广告屏 (户外, 320×160mm)",
+        "10.0-out": "P10.0 - 远距广告牌 (户外, 320×160mm)"
+      }
+    };
+
+    const NOVASTAR_PROCESSORS = [
+      { name: "Novastar TB30", maxPx: 650000, maxW: 4096, maxH: 4096, ports: 2, alt: "Novastar VC2", type: "async" },
+      { name: "Novastar VC2", maxPx: 1300000, maxW: 3840, maxH: 1920, ports: 2, alt: "Novastar MCTRL300", type: "sync" },
+      { name: "Novastar TB40/50", maxPx: 1300000, maxW: 4096, maxH: 4096, ports: 2, alt: "Novastar VC2", type: "async" },
+      { name: "Novastar TB60", maxPx: 2300000, maxW: 4096, maxH: 4096, ports: 4, alt: "Novastar VX400", type: "async" },
+      { name: "Novastar VX400", maxPx: 2600000, maxW: 10240, maxH: 8192, ports: 4, alt: "Novastar VC4", type: "sync" },
+      { name: "Novastar VX600", maxPx: 3900000, maxW: 10240, maxH: 8192, ports: 6, alt: "Novastar VC6", type: "sync" },
+      { name: "Novastar VX1000", maxPx: 6500000, maxW: 10240, maxH: 8192, ports: 10, alt: "Novastar VC10", type: "sync" },
+      { name: "Novastar VX16s", maxPx: 10400000, maxW: 16384, maxH: 8192, ports: 16, alt: "Novastar VC16", type: "sync" },
+      { name: "Novastar VC24", maxPx: 15600000, maxW: 16384, maxH: 8192, ports: 24, alt: "Novastar H15", type: "sync" }
+    ];
+
+    const HUIDU_PROCESSORS = [
+      { name: "Huidu HD-A4", maxPx: 655360, maxW: 16384, maxH: 2048, ports: 1, alt: "Huidu HD-C16C", type: "async" },
+      { name: "Huidu HD-A5", maxPx: 1300000, maxW: 3840, maxH: 1920, ports: 2, alt: "Huidu HD-VP210", type: "async" },
+      { name: "Huidu HD-A6", maxPx: 2300000, maxW: 3840, maxH: 1920, ports: 4, alt: "Huidu HD-VP410", type: "async" },
+      { name: "Huidu HD-VP210", maxPx: 1300000, maxW: 3840, maxH: 1920, ports: 2, alt: "Huidu HD-A5", type: "sync" },
+      { name: "Huidu HD-VP410", maxPx: 2600000, maxW: 3840, maxH: 1920, ports: 4, alt: "Huidu HD-A6", type: "sync" },
+      { name: "Huidu HD-VP630", maxPx: 3900000, maxW: 7680, maxH: 3840, ports: 6, alt: "Huidu HD-A8", type: "sync" },
+      { name: "Huidu HD-VP830", maxPx: 5200000, maxW: 7680, maxH: 3840, ports: 8, alt: "Huidu HD-A8", type: "sync" },
+      { name: "Huidu HD-VP1240", maxPx: 7800000, maxW: 16000, maxH: 3840, ports: 12, alt: "Huidu HD-VP1640", type: "sync" },
+      { name: "Huidu HD-VP1640", maxPx: 10400000, maxW: 16000, maxH: 3840, ports: 16, alt: "Huidu Cluster", type: "sync" }
+    ];
+
+    function getRecommendedMCB(safetyCurrent) {
+      const standardMCBs = [2, 4, 6, 10, 16, 20, 25, 32, 40, 50, 63, 80, 100, 125, 160, 200, 250];
+      for (let mcb of standardMCBs) {
+        if (mcb >= safetyCurrent) return mcb;
+      }
+      return Math.ceil(safetyCurrent);
+    }
+
+    function getCableSize1P(mcb) {
+      if (mcb <= 10) return "3 × 1.5 mm²";
+      if (mcb <= 16) return "3 × 2.5 mm²";
+      if (mcb <= 25) return "3 × 4.0 mm²";
+      if (mcb <= 32) return "3 × 6.0 mm²";
+      if (mcb <= 40) return "3 × 10.0 mm²";
+      if (mcb <= 63) return "3 × 16.0 mm²";
+      if (mcb <= 80) return "3 × 25.0 mm²";
+      if (mcb <= 100) return "3 × 35.0 mm²";
+      if (mcb <= 125) return "3 × 50.0 mm²";
+      return "Hubungi Teknisi";
+    }
+
+    function getCableSize3P(mcb) {
+      if (mcb <= 10) return "5 × 1.5 mm²";
+      if (mcb <= 16) return "5 × 2.5 mm²";
+      if (mcb <= 25) return "5 × 4.0 mm²";
+      if (mcb <= 32) return "5 × 6.0 mm²";
+      if (mcb <= 40) return "5 × 10.0 mm²";
+      if (mcb <= 63) return "5 × 16.0 mm²";
+      if (mcb <= 80) return "5 × 25.0 mm²";
+      if (mcb <= 100) return "5 × 35.0 mm²";
+      if (mcb <= 125) return "5 × 50.0 mm²";
+      return "Hubungi Teknisi";
+    }
+
+    function populatePitchOptions() {
+      const pSelect = document.getElementById('pitch');
+      const srSelect = document.getElementById('sr-pitch'); 
+      
+      const val = pSelect.value || "2.5";
+      const srVal = srSelect ? (srSelect.value || "3.91-in") : "3.91-in";
+      
+      pSelect.innerHTML = '';
+      if (srSelect) srSelect.innerHTML = '';
+      
+      const names = MODULE_NAMES[currentLang] || MODULE_NAMES.id;
+      for (const k in names) {
+        const opt = document.createElement('option'); opt.value = k; opt.innerText = names[k];
+        if (k === val) opt.selected = true;
+        pSelect.appendChild(opt);
+        
+        if (srSelect) {
+            const optSr = document.createElement('option'); optSr.value = k; optSr.innerText = names[k];
+            if (k === srVal || (srVal==="3.91" && k==="3.91-in")) optSr.selected = true;
+            srSelect.appendChild(optSr);
+        }
+      }
+    }
+
+    function switchUnit(nu) {
+      if (currentUnit === nu) return;
+      const inpW = document.getElementById('dim_width'); const inpH = document.getElementById('dim_height');
+      let vW = parseFloat(inpW.value) || 0; let vH = parseFloat(inpH.value) || 0;
+      let mmW = currentUnit === 'm' ? vW*1000 : (currentUnit === 'cm' ? vW*10 : vW);
+      let mmH = currentUnit === 'm' ? vH*1000 : (currentUnit === 'cm' ? vH*10 : vH);
+      if(nu==='m'){ inpW.value = parseFloat((mmW/1000).toFixed(3)); inpH.value = parseFloat((mmH/1000).toFixed(3)); inpW.step='0.01'; inpH.step='0.01';}
+      else if(nu==='cm'){ inpW.value = parseFloat((mmW/10).toFixed(1)); inpH.value = parseFloat((mmH/10).toFixed(1)); inpW.step='1'; inpH.step='1';}
+      else{ inpW.value = Math.round(mmW); inpH.value = Math.round(mmH); inpW.step='10'; inpH.step='10';}
+      currentUnit = nu;
+      document.getElementById('unit-label-w').innerText = nu; document.getElementById('unit-label-h').innerText = nu;
+      calculate();
+    }
+
+    function changeLanguage(val) {
+      currentLang = val;
+      const dict = DICTIONARY[val];
+      
+      // Header & Navigation
+      document.getElementById('t-subtitle').innerText = dict.subtitle;
+      document.getElementById('text-tab-main').innerText = dict.tab_main;
+      document.getElementById('text-tab-ratio').innerText = dict.tab_ratio;
+      document.getElementById('t-admin-badge').innerHTML = "⚙️ " + (val === 'zh' ? '管理' : 'Admin');
+      
+      // Unit Dropdown Options
+      document.getElementById('opt-mm').innerText = dict.opt_mm;
+      document.getElementById('opt-cm').innerText = dict.opt_cm;
+      document.getElementById('opt-m').innerText = dict.opt_m;
+
+      // Card 1: Dimensi
+      document.getElementById('t-dim-title').innerHTML = `<span>📐</span> ${dict.dim_title}`;
+      document.getElementById('t-pitch-label').innerText = dict.pitch_label;
+      
+      // Update the new cabinet labels
+      if (document.getElementById('t-cabinet-label')) {
+          document.getElementById('t-cabinet-label').innerText = dict.cabinet_label;
+      }
+      if (document.getElementById('opt-cab-640')) {
+          document.getElementById('opt-cab-640').innerText = dict.opt_cab_640;
+      }
+      if (document.getElementById('opt-cab-960')) {
+          document.getElementById('opt-cab-960').innerText = dict.opt_cab_960;
+      }
+      if (document.getElementById('opt-cab-custom')) {
+          document.getElementById('opt-cab-custom').innerText = dict.opt_cab_custom;
+      }
+      
+      document.getElementById('t-width-label').innerText = dict.width_label;
+      document.getElementById('t-height-label').innerText = dict.height_label;
+      
+      // Card 2: Resolusi
+      document.getElementById('t-res-title').innerHTML = `<span>📟</span> ${dict.res_title}`;
+      document.getElementById('t-lbl-native-res').innerText = dict.native_res;
+      document.getElementById('t-lbl-total-px').innerText = dict.total_px;
+      document.getElementById('t-lbl-exact-ratio').innerText = dict.exact_ratio;
+      document.getElementById('t-lbl-ratio-status').innerText = dict.ratio_status;
+      
+      // Card 3: Controller
+      document.getElementById('t-proc-title').innerHTML = `<span>🔌</span> ${dict.proc_title}`;
+      document.getElementById('t-nova-main-lbl').innerText = dict.main_lbl;
+      document.getElementById('t-nova-spec-lbl').innerText = dict.spec_lbl;
+      document.getElementById('t-nova-alt-lbl').innerText = dict.alt_lbl;
+      if(document.getElementById('t-nova-rc-lbl')) document.getElementById('t-nova-rc-lbl').innerText = dict.rc_lbl;
+      
+      document.getElementById('t-hd-main-lbl').innerText = dict.main_lbl;
+      document.getElementById('t-hd-spec-lbl').innerText = dict.spec_lbl;
+      document.getElementById('t-hd-alt-lbl').innerText = dict.alt_lbl;
+      if(document.getElementById('t-hd-rc-lbl')) document.getElementById('t-hd-rc-lbl').innerText = dict.rc_lbl;
+      
+      document.getElementById('t-lbl-proc-ports').innerText = dict.ports;
+      
+      // Card 4: Kelistrikan
+      document.getElementById('t-elec-title').innerHTML = `<span>🔋</span> ${dict.elec_title}`;
+      document.getElementById('t-lbl-power-max').innerText = dict.power_max;
+      document.getElementById('t-1p-header').innerText = dict.p1_head;
+      document.getElementById('t-lbl-1p-cur').innerText = dict.cur;
+      document.getElementById('t-lbl-1p-mcb').innerText = dict.mcb;
+      document.getElementById('t-lbl-1p-cable').innerText = dict.cable;
+      document.getElementById('t-3p-header').innerText = dict.p3_head;
+      document.getElementById('t-lbl-3p-cur').innerText = dict.cur3;
+      document.getElementById('t-lbl-3p-mcb').innerText = dict.mcb;
+      document.getElementById('t-lbl-3p-cable').innerText = dict.cable;
+      document.getElementById('t-lbl-genset').innerText = dict.genset;
+
+      // Card 5: Smart Ratio Tab
+      document.getElementById('t-sr-title').innerHTML = `<span>⚡</span> ${dict.sr_title}`;
+      document.getElementById('t-sr-pitch-lbl').innerText = dict.sr_pitch;
+      document.getElementById('t-sr-rw-lbl').innerText = dict.sr_rw;
+      document.getElementById('t-sr-rh-lbl').innerText = dict.sr_rh;
+      document.getElementById('t-sr-pxw-lbl').innerText = dict.sr_pxw;
+      document.getElementById('t-sr-pxh-lbl').innerText = dict.sr_pxh;
+      document.getElementById('t-sr-final-lbl').innerText = dict.sr_final;
+      document.getElementById('t-sr-reset-btn').innerHTML = `<span>🔄</span> ${dict.sr_reset}`;
+      document.getElementById('sr-rw').placeholder = dict.placeholder_auto;
+      document.getElementById('sr-rh').placeholder = dict.placeholder_auto;
+      document.getElementById('sr-pxw').placeholder = dict.placeholder_type;
+      document.getElementById('sr-pxh').placeholder = dict.placeholder_type;
+
+      // Admin Panel
+      document.getElementById('t-adm-title').innerText = dict.admin_panel_title;
+      document.getElementById('t-adm-eff-lbl').innerText = dict.admin_eff;
+      document.getElementById('t-adm-pf-lbl').innerText = dict.admin_pf;
+      document.getElementById('t-adm-port-lbl').innerText = dict.admin_port;
+      document.getElementById('t-adm-export-btn').innerText = dict.admin_export;
+      document.getElementById('t-adm-close-btn').innerText = dict.admin_close;
+
+      // Modals
+      document.getElementById('modal-admin-title').innerText = dict.modal_admin_title;
+      document.getElementById('admin-password-input').placeholder = dict.modal_admin_pass;
+      document.getElementById('modal-admin-cancel').innerText = dict.modal_admin_cancel;
+      document.getElementById('modal-admin-login').innerText = dict.modal_admin_login;
+      document.getElementById('admin-error-msg').innerText = dict.modal_admin_err;
+
+      document.getElementById('modal-export-title').innerText = dict.modal_export_title;
+      document.getElementById('modal-export-copy').innerText = dict.modal_export_copy;
+      document.getElementById('modal-export-down').innerText = dict.modal_export_down;
+
+      document.getElementById('modal-wa-title').innerText = dict.modal_wa_title;
+      document.getElementById('modal-wa-app').innerText = dict.modal_wa_app;
+      document.getElementById('modal-wa-or').innerText = dict.modal_wa_or;
+      document.getElementById('modal-wa-send').innerText = dict.modal_wa_send;
+
+      document.getElementById('modal-ai-title').innerHTML = `<span>⚡</span> ${dict.modal_ai_title}`;
+      document.getElementById('modal-ai-copy').innerHTML = `<span class="text-sm">📋</span> ${dict.modal_ai_copy}`;
+      document.getElementById('modal-ai-fw').innerHTML = `<span class="text-sm">📲</span> ${dict.modal_ai_fw}`;
+      document.getElementById('modal-ai-close').innerText = dict.modal_ai_close;
+
+      document.getElementById('t-prof-title').innerHTML = `⚙️ ${dict.prof_title}`;
+      document.getElementById('t-prof-desc').innerText = dict.prof_desc;
+      if (document.getElementById('t-prof-wa')) document.getElementById('t-prof-wa').innerText = dict.prof_wa;
+      document.getElementById('t-prof-close').innerText = dict.prof_close;
+
+      document.getElementById('modal-about-title').innerHTML = `<span>ℹ️</span> ${dict.modal_about_title}`;
+      document.getElementById('modal-about-close').innerText = dict.modal_about_close;
+      document.getElementById('help-modal-understand').innerText = dict.help_understand;
+
+      // Tooltips
+      document.getElementById('help-btn-main').title = dict.tooltip_help;
+      document.getElementById('help-btn-ratio').title = dict.tooltip_help;
+      document.getElementById('help-btn-dim').title = dict.tooltip_help;
+      document.getElementById('help-btn-res').title = dict.tooltip_help;
+      document.getElementById('help-btn-proc').title = dict.tooltip_help;
+      document.getElementById('help-btn-elec').title = dict.tooltip_help;
+      
+      // Bottom AI Button
+      document.getElementById('btn-ai-text').innerText = dict.btn_ai;
+
+      populatePitchOptions();
+      calculate();
+      
+      let toastMsg = val === 'zh' ? '语言已切换为中文' : (val === 'en' ? 'Language switched to English' : 'Bahasa diubah ke Indonesia');
+      showToast(toastMsg);
+    }
+
+    function getAccurateProcessorRecommendations(totalW, totalH, totalPx, modType, totalRC, rcPxW, rcPxH) {
+      const portCap = parseFloat(document.getElementById('adm-port-cap')?.value) || 650000;
+      
+      // Sinkronisasi PORT berdasarkan RC yg dirangkai (1 Port maks 650k Pixel, tidak memotong mapping RC yg sedang terangkai)
+      const maxRCperPort = Math.max(1, Math.floor(portCap / (rcPxW * rcPxH)));
+      const portByRC = Math.ceil(totalRC / maxRCperPort);
+      const portByPx = Math.ceil(totalPx / portCap);
+      const reqPorts = Math.max(portByPx, portByRC);
+
+      let capLblL = currentLang === 'zh' ? '宽' : 'W';
+      let capLblT = currentLang === 'zh' ? '高' : 'H';
+
+      // Logika prioritas tipe berdasarkan tipe modul (Indoor = Sync, Outdoor = Async)
+      const targetType = modType === 'outdoor' ? 'async' : 'sync';
+
+      // =========================== NOVASTAR ===========================
+      let n_main, n_alt, n_capText, n_load;
+      
+      // Prioritaskan mencari prosesor dengan tipe yang sama
+      let n_match = NOVASTAR_PROCESSORS.find(p => p.type === targetType && totalPx <= p.maxPx && totalW <= p.maxW && totalH <= p.maxH);
+      // Jika tidak ketemu yang tipenya sama, ambil fallback apa saja yang muat kapasitasnya
+      if(!n_match) {
+          n_match = NOVASTAR_PROCESSORS.find(p => totalPx <= p.maxPx && totalW <= p.maxW && totalH <= p.maxH);
+      }
+
+      if(n_match) {
+        n_main = n_match.name; n_alt = n_match.alt;
+        n_capText = `Max ${(n_match.maxPx/1000000).toFixed(1)}M px (${capLblL}: ${n_match.maxW}px, ${capLblT}: ${n_match.maxH}px)`;
+        n_load = Math.min(100, ((totalPx / n_match.maxPx) * 100)).toFixed(1);
+      } else {
+        if(targetType === 'async') {
+            let count = Math.ceil(totalPx / 2300000);
+            n_main = `${count}x Novastar TB60`;
+            n_alt = `Async Cluster System`;
+            n_capText = "Multi-Player Cluster";
+            n_load = '-';
+        } else {
+            let count = Math.ceil(totalPx / 15600000);
+            n_main = `${count}x Novastar VC24 (Cascaded)`;
+            n_alt = `Distributed Wall System`;
+            n_capText = "Ultra-Large Splicer";
+            n_load = '-';
+        }
+      }
+      
+      // =========================== HUIDU ===========================
+      let h_main, h_alt, h_capText, h_load;
+      
+      // Prioritaskan mencari prosesor dengan tipe yang sama
+      let h_match = HUIDU_PROCESSORS.find(p => p.type === targetType && totalPx <= p.maxPx && totalW <= p.maxW && totalH <= p.maxH);
+      // Fallback
+      if(!h_match) {
+          h_match = HUIDU_PROCESSORS.find(p => totalPx <= p.maxPx && totalW <= p.maxW && totalH <= p.maxH);
+      }
+      
+      if(h_match) {
+        h_main = h_match.name; h_alt = h_match.alt;
+        h_capText = `Max ${(h_match.maxPx/1000000).toFixed(1)}M px (${capLblL}: ${h_match.maxW}px, ${capLblT}: ${h_match.maxH}px)`;
+        h_load = Math.min(100, ((totalPx / h_match.maxPx) * 100)).toFixed(1);
+      } else {
+        if(targetType === 'async') {
+            let count = Math.ceil(totalPx / 2300000);
+            h_main = `${count}x Huidu HD-A6`;
+            h_alt = `Async Cluster System`;
+            h_capText = "Multi-Player Cluster";
+            h_load = '-';
+        } else {
+            let count = Math.ceil(totalPx / 10400000);
+            h_main = `${count}x Huidu HD-VP1640`;
+            h_alt = `Splicer Cluster`;
+            h_capText = "Cascade System";
+            h_load = '-';
+        }
+      }
+
+      return { reqPorts, nova: { main: n_main, alt: n_alt, capText: n_capText, load: n_load }, hd: { main: h_main, alt: h_alt, capText: h_capText, load: h_load } };
+    }
+
+    function getGCD(a, b) { return b === 0 ? a : getGCD(b, a % b); }
+    function getAspectRatio(w, h) {
+      if(!w || !h) return { dec:"0.000", frac:"0:0", name:"-" };
+      let gcd = getGCD(w,h); let n = w/gcd, d = h/gcd, r = w/h;
+      let name = "Custom";
+      if(Math.abs(r - 16/9) < 0.05) { n=16; d=9; name="16:9 Standard"; }
+      else if(Math.abs(r - 4/3) < 0.05) { n=4; d=3; name="4:3 Fullscreen"; }
+      else if(Math.abs(r - 21/9) < 0.05) { n=21; d=9; name="21:9 Ultrawide"; }
+      return { dec: r.toFixed(3), frac: `${n}:${d}`, name };
+    }
+
+    function calculate() {
+      const pitchKey = document.getElementById('pitch').value || "2.5";
+      const mod = LED_MODULE_DATABASE[pitchKey];
+      const pitchNum = parseFloat(pitchKey);
+      
+      const cabSelect = document.getElementById('cabinet');
+      const cabVal = cabSelect ? cabSelect.value : "custom";
+      
+      let baseWMm = mod.widthMm;
+      let baseHMm = mod.heightMm;
+      let isCabinet = false;
+      
+      // Override if a cabinet is selected
+      if (cabVal !== "custom") {
+          if (cabVal === "600" && mod.type === 'indoor' && pitchNum <= 2.5) { baseWMm = 600; baseHMm = 337.5; isCabinet = true; }
+          else if (cabVal === "640" && mod.type === 'indoor' && pitchNum <= 2.5) { baseWMm = 640; baseHMm = 480; isCabinet = true; }
+          else if (cabVal === "480" && mod.type === 'indoor' && pitchNum <= 2.5) { baseWMm = 480; baseHMm = 480; isCabinet = true; }
+          else if (cabVal === "640x640") { baseWMm = 640; baseHMm = 640; isCabinet = true; }
+          else if (cabVal === "960x960") { baseWMm = 960; baseHMm = 960; isCabinet = true; }
+      }
+      
+      const inW = parseFloat(document.getElementById('dim_width').value) || 0;
+      const inH = parseFloat(document.getElementById('dim_height').value) || 0;
+      
+      let tarW = currentUnit === 'm' ? inW*1000 : (currentUnit === 'cm' ? inW*10 : inW);
+      let tarH = currentUnit === 'm' ? inH*1000 : (currentUnit === 'cm' ? inH*10 : inH);
+      
+      const gridW = Math.max(1, Math.round(tarW / baseWMm));
+      const gridH = Math.max(1, Math.round(tarH / baseHMm));
+      const totGrid = gridW * gridH;
+      
+      const actWMm = gridW * baseWMm; 
+      const actHMm = gridH * baseHMm;
+      const area = (actWMm/1000) * (actHMm/1000);
+      
+      let pxW, pxH;
+      if (isCabinet) {
+          pxW = gridW * Math.round(baseWMm / pitchNum);
+          pxH = gridH * Math.round(baseHMm / pitchNum);
+      } else {
+          pxW = gridW * mod.pixelW;
+          pxH = gridH * mod.pixelH;
+      }
+      const totPx = pxW * pxH;
+      const mp = (totPx / 1000000).toFixed(2);
+      
+      const aspect = getAspectRatio(pxW, pxH);
+      
+      // Dynamic Labels for Matrix based on cabinet/module choice
+      let wLbl = currentLang === 'zh' ? '宽' : 'W';
+      let hLbl = currentLang === 'zh' ? '高' : 'H';
+      let uLbl = currentLang === 'zh' ? (isCabinet ? '箱体' : '块') : (isCabinet ? 'Kabinet' : 'Unit');
+      let matrixLbl = currentLang === 'zh' ? (isCabinet ? '箱体矩阵:' : '模组矩阵:') : 
+                      (currentLang === 'en' ? (isCabinet ? 'Cabinet Matrix:' : 'Module Matrix:') : 
+                      (isCabinet ? 'Matriks Kabinet:' : 'Matriks Modul:'));
+                      
+      document.getElementById('t-lbl-matrix').innerText = matrixLbl;
+      document.getElementById('out-module-count').innerText = `${gridW} (${wLbl}) × ${gridH} (${hLbl}) = ${totGrid} ${uLbl}`;
+      document.getElementById('out-meter-size').innerText = `${parseFloat((actWMm/10).toFixed(2))} × ${parseFloat((actHMm/10).toFixed(2))} cm`;
+      document.getElementById('out-area').innerText = `${area.toFixed(3)} m²`;
+      document.getElementById('out-pixel-w').innerText = pxW.toLocaleString('id-ID');
+      document.getElementById('out-pixel-h').innerText = pxH.toLocaleString('id-ID');
+      document.getElementById('out-total-pixels').innerText = totPx.toLocaleString('id-ID');
+      document.getElementById('out-mp').innerText = mp;
+      
+      document.getElementById('visual-aspect').innerText = aspect.frac;
+      document.getElementById('out-standard-ratio').innerText = aspect.name;
+      document.getElementById('out-exact-ratio').innerText = `${aspect.frac} (${aspect.dec}:1)`;
+
+      // ==========================================
+      // LOGIKA RECEIVING CARD (RC) & LIMITASI PORT
+      // ==========================================
+      let rcCols, rcRows, totalRC, rcPxW, rcPxH;
+
+      if (isCabinet) {
+          // Jika menggunakan kabinet, asumsikan 1 RC per Kabinet
+          rcCols = gridW;
+          rcRows = gridH;
+          totalRC = rcCols * rcRows;
+          rcPxW = Math.round(baseWMm / pitchNum);
+          rcPxH = Math.round(baseHMm / pitchNum);
+      } else {
+          // Custom Modul (Tanpa Kabinet) - Aturan Batas Khusus
+          let maxModW = 1, maxModH = 1;
+
+          if (pitchKey === "1.538") { maxModW = 2; maxModH = 4; }
+          else if (pitchKey === "1.86") { maxModW = 2; maxModH = 5; }
+          else if (pitchKey === "2.0") { maxModW = 2; maxModH = 6; }
+          else if (pitchKey === "2.5") { maxModW = 2; maxModH = 6; }
+          else if (pitchKey.startsWith("3.") || pitchKey === "2.976") { maxModW = 3; maxModH = 6; }
+          else if (pitchKey.startsWith("4.")) { maxModW = 4; maxModH = 6; }
+          else if (pitchKey.startsWith("5.")) { maxModW = 5; maxModH = 6; }
+          else {
+              // Standar keamanan RC murni: 512x512 fallback
+              maxModW = Math.max(1, Math.floor(512 / mod.pixelW));
+              maxModH = Math.max(1, Math.floor(512 / mod.pixelH));
+          }
+          
+          rcCols = Math.ceil(gridW / maxModW);
+          rcRows = Math.ceil(gridH / maxModH);
+          totalRC = rcCols * rcRows;
+          rcPxW = maxModW * mod.pixelW;
+          rcPxH = maxModH * mod.pixelH;
+      }
+      
+      if(document.getElementById('out-nova-rc-count')) {
+          document.getElementById('out-nova-rc-count').innerText = totalRC;
+      }
+      if(document.getElementById('out-hd-rc-count')) {
+          document.getElementById('out-hd-rc-count').innerText = totalRC;
+      }
+      
+      // Mengirimkan data RC untuk mem-validasi pemakaian port
+      const proc = getAccurateProcessorRecommendations(pxW, pxH, totPx, mod.type, totalRC, rcPxW, rcPxH);
+      
+      document.getElementById('proc-port-badge').innerText = `${proc.reqPorts} Port RJ45`;
+      document.getElementById('out-proc-ports').innerText = `${proc.reqPorts} Port RJ45`;
+      
+      document.getElementById('out-nova-main').innerText = proc.nova.main;
+      document.getElementById('out-nova-alt').innerText = proc.nova.alt;
+      document.getElementById('out-nova-cap').innerText = proc.nova.capText;
+      document.getElementById('out-nova-load-badge').innerText = `Load: ${proc.nova.load}%`;
+      if(proc.nova.load !== '-' && parseFloat(proc.nova.load) > 85) {
+          document.getElementById('out-nova-load-badge').className = "text-[9px] font-bold px-2 py-0.5 rounded-lg bg-amber-100 text-amber-700 shadow-sm";
+      } else {
+          document.getElementById('out-nova-load-badge').className = "text-[9px] font-bold px-2 py-0.5 rounded-lg bg-slate-100 text-slate-600 shadow-sm";
+      }
+      
+      document.getElementById('out-hd-main').innerText = proc.hd.main;
+      document.getElementById('out-hd-alt').innerText = proc.hd.alt;
+      document.getElementById('out-hd-cap').innerText = proc.hd.capText;
+      document.getElementById('out-hd-load-badge').innerText = `Load: ${proc.hd.load}%`;
+      if(proc.hd.load !== '-' && parseFloat(proc.hd.load) > 85) {
+          document.getElementById('out-hd-load-badge').className = "text-[9px] font-bold px-2 py-0.5 rounded-lg bg-amber-100 text-amber-700 shadow-sm";
+      } else {
+          document.getElementById('out-hd-load-badge').className = "text-[9px] font-bold px-2 py-0.5 rounded-lg bg-slate-100 text-slate-600 shadow-sm";
+      }
+
+      // PRECISE POWER CALCULATION
+      const eff = (parseFloat(document.getElementById('adm-eff')?.value) || 88) / 100;
+      const pf = parseFloat(document.getElementById('adm-pf')?.value) || 0.95;
+      
+      const modAreaSqm = (mod.widthMm / 1000) * (mod.heightMm / 1000);
+      const wattsPerSqmMax = mod.maxWattsDC / modAreaSqm;
+      const wattsPerSqmAvg = mod.avgWattsDC / modAreaSqm;
+      
+      const totalWattsDC = area * wattsPerSqmMax;
+      const totalAvgWattsDC = area * wattsPerSqmAvg;
+      
+      const wMax = totalWattsDC / eff;
+      const wAvg = totalAvgWattsDC / eff;
+      
+      document.getElementById('display-eff-val').innerText = Math.round(eff * 100);
+      document.getElementById('display-pf-val').innerText = pf.toFixed(2);
+
+      const actualRatio = Math.round((mod.avgWattsDC / mod.maxWattsDC) * 100);
+      const baseText = DICTIONARY[currentLang].power_avg.replace('33', actualRatio);
+      document.getElementById('t-lbl-power-avg').innerText = baseText;
+      
+      const v1p = 220, v3p = 380;
+      const vaMax = wMax / pf;
+      
+      const current1P = vaMax / v1p; 
+      const current3P = (vaMax / 3) / v1p; 
+      
+      const safety1P = current1P * 1.25;
+      const safety3P = current3P * 1.25;
+
+      const mcb1P = getRecommendedMCB(safety1P);
+      const cable1P = getCableSize1P(mcb1P);
+      const mcb3P = getRecommendedMCB(safety3P);
+      const cable3P = getCableSize3P(mcb3P);
+      
+      document.getElementById('out-power-max-kw').innerText = (wMax/1000).toFixed(3);
+      document.getElementById('out-power-max-w').innerText = Math.round(wMax).toLocaleString('id-ID');
+      document.getElementById('out-power-avg-kw').innerText = (wAvg/1000).toFixed(3);
+      document.getElementById('out-power-avg-w').innerText = Math.round(wAvg).toLocaleString('id-ID');
+      
+      document.getElementById('out-watt-sqm').innerText = area > 0 ? Math.round(wMax / area).toLocaleString('id-ID') : 0;
+      document.getElementById('out-va-max').innerText = Math.round(vaMax).toLocaleString('id-ID');
+      
+      document.getElementById('out-current-1p').innerText = current1P.toFixed(2);
+      document.getElementById('out-mcb-1p').innerText = `${mcb1P}A (1-Pole)`;
+      document.getElementById('out-cable-1p').innerText = cable1P;
+      
+      const badge1P = document.getElementById('badge-1phase-status');
+      if(current1P > 32) {
+        badge1P.innerText = currentLang === 'zh' ? "高负载" : (currentLang === 'en' ? "High Load" : "Beban Tinggi");
+        badge1P.className = "text-[9px] font-bold px-2 py-0.5 rounded-lg bg-red-100 text-red-600";
+      } else if (current1P > 20) {
+        badge1P.innerText = currentLang === 'zh' ? "临界" : (currentLang === 'en' ? "Warning" : "Rawan");
+        badge1P.className = "text-[9px] font-bold px-2 py-0.5 rounded-lg bg-amber-100 text-amber-600";
+      } else {
+        badge1P.innerText = currentLang === 'zh' ? "安全" : (currentLang === 'en' ? "Safe" : "Aman");
+        badge1P.className = "text-[9px] font-bold px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-600";
+      }
+
+      document.getElementById('t-3p-badge').innerText = currentLang === 'zh' ? "推荐" : (currentLang === 'en' ? "Recommended" : "Disarankan");
+
+      document.getElementById('out-current-3p').innerText = current3P.toFixed(2);
+      document.getElementById('out-mcb-3p').innerText = `${mcb3P}A (3-Pole)`;
+      document.getElementById('out-cable-3p').innerText = cable3P;
+      
+      const gensetKVA = parseFloat(Math.max(1, (vaMax / 1000) / 0.8).toFixed(2));
+      document.getElementById('out-genset').innerText = `${gensetKVA} kVA`;
+      
+      const vBox = document.getElementById('screen-visual');
+      let ratioVisual = actWMm/actHMm; let wb = 100, hb = 100/ratioVisual;
+      if(hb > 50) { hb=50; wb=50*ratioVisual; }
+      vBox.style.width = `${Math.min(120, Math.max(40, wb))}px`; vBox.style.height = `${Math.min(60, Math.max(15, hb))}px`;
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-text').innerText = msg;
+      toast.classList.replace('translate-y-[-150%]', 'translate-y-0'); toast.classList.replace('opacity-0', 'opacity-100');
+      setTimeout(() => { toast.classList.replace('translate-y-0', 'translate-y-[-150%]'); toast.classList.replace('opacity-100', 'opacity-0'); }, 3000);
+    }
+
+    function openAboutModal() { 
+      document.getElementById('about-modal-text').innerText = document.getElementById('t-subtitle').innerText;
+      document.getElementById('about-modal').classList.remove('hidden'); 
+    }
+    function closeAboutModal() { document.getElementById('about-modal').classList.add('hidden'); }
+
+    function openProfileModal() { document.getElementById('profile-modal').classList.remove('hidden'); setTimeout(()=>{document.getElementById('profile-modal').classList.remove('opacity-0');},10); }
+    function closeProfileModal() { document.getElementById('profile-modal').classList.add('opacity-0'); setTimeout(()=>{document.getElementById('profile-modal').classList.add('hidden');},300); }
+    function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
+    function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
+    
+    function verifyAdminLogin() {
+      if(document.getElementById('admin-password-input').value === 'gretongers'){
+        isAdmin = true; closeAdminModal();
+        document.getElementById('admin-badge').classList.remove('hidden'); document.getElementById('admin-badge').classList.add('flex');
+        document.getElementById('admin-lock-btn').classList.add('hidden'); document.getElementById('admin-panel').classList.remove('hidden');
+        showToast(DICTIONARY[currentLang].admin_granted);
+      } else { document.getElementById('admin-error-msg').classList.remove('hidden'); }
+    }
+    function logoutAdmin() {
+      isAdmin = false; document.getElementById('admin-badge').classList.add('hidden'); document.getElementById('admin-lock-btn').classList.remove('hidden');
+      document.getElementById('admin-panel').classList.add('hidden');
+    }
+
+    function openExportCodeModal() { 
+      const clonedDOM = document.documentElement.cloneNode(true);
+      const adminBadge = clonedDOM.querySelector('#admin-badge');
+      if (adminBadge) { adminBadge.classList.add('hidden'); adminBadge.classList.remove('flex'); }
+      const adminLockBtn = clonedDOM.querySelector('#admin-lock-btn');
+      if (adminLockBtn) { adminLockBtn.classList.remove('hidden'); }
+      const adminPanel = clonedDOM.querySelector('#admin-panel');
+      if (adminPanel) { adminPanel.classList.add('hidden'); }
+      const exportModal = clonedDOM.querySelector('#export-code-modal');
+      if (exportModal) { exportModal.classList.add('hidden'); }
+      const aiModalClone = clonedDOM.querySelector('#ai-modal');
+      if (aiModalClone) { aiModalClone.classList.add('hidden'); }
+      const aboutModalClone = clonedDOM.querySelector('#about-modal');
+      if (aboutModalClone) { aboutModalClone.classList.add('hidden'); }
+      const helpModalClone = clonedDOM.querySelector('#help-modal');
+      if (helpModalClone) { helpModalClone.classList.add('hidden'); }
+      
+      const codeOutput = "<!DOCTYPE html>\n" + clonedDOM.outerHTML;
+      document.getElementById('export-code-area').value = codeOutput;
+      document.getElementById('export-code-modal').classList.remove('hidden'); 
+    }
+    function closeExportCodeModal() { document.getElementById('export-code-modal').classList.add('hidden'); }
+
+    function copySourceCode() {
+      const codeArea = document.getElementById('export-code-area');
+      codeArea.select();
+      codeArea.setSelectionRange(0, 999999); 
+      try { 
+        document.execCommand('copy'); 
+        showToast(currentLang === 'zh' ? "代码已复制！" : (currentLang === 'en' ? "Code copied!" : "Kode berhasil disalin!")); 
+      } 
+      catch(e) { 
+        showToast(currentLang === 'zh' ? "复制失败。" : (currentLang === 'en' ? "Failed to copy." : "Gagal menyalin kode.")); 
+      }
+    }
+
+    function downloadHTMLFile() {
+      const content = document.getElementById('export-code-area').value;
+      const blob = new Blob([content], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'mbong_calculator_v3.html';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(currentLang === 'zh' ? "HTML文件下载成功！" : (currentLang === 'en' ? "HTML File downloaded successfully!" : "File HTML berhasil diunduh!"));
+    }
+
+    function openWhatsAppModal() { document.getElementById('wa-modal').classList.remove('hidden'); }
+    function closeWhatsAppModal() { document.getElementById('wa-modal').classList.add('hidden'); }
+
+    function sendWhatsAppDirect() {
+      let phone = document.getElementById('custom-wa-phone').value.replace(/\D/g, '');
+      if(phone.startsWith('0')) { phone = '62' + phone.substring(1); }
+      if (!currentAITextRaw) { generateAITextForSharing(); }
+      const text = encodeURIComponent(currentAITextRaw);
+      window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${text}`, '_blank');
+      closeWhatsAppModal();
+    }
+    
+    // ==========================================
+    // FUNGSI MBONG AI GENERATOR
+    // ==========================================
+    function generateAITextForSharing() {
+      const pitchSelect = document.getElementById('pitch');
+      const pitchKey = pitchSelect.value;
+      const pitchNum = parseFloat(pitchKey);
+      const pitchText = pitchSelect.options[pitchSelect.selectedIndex].text;
+      
+      const cabSelect = document.getElementById('cabinet');
+      const cabVal = cabSelect ? cabSelect.value : "custom";
+      const isCabinet = (cabVal !== "custom");
+      
+      const sizeStr = document.getElementById('out-meter-size').innerText;
+      const area = document.getElementById('out-area').innerText;
+      const resW = document.getElementById('out-pixel-w').innerText;
+      const resH = document.getElementById('out-pixel-h').innerText;
+      const totPx = document.getElementById('out-total-pixels').innerText;
+      const ratio = document.getElementById('out-exact-ratio').innerText;
+      const ratioName = document.getElementById('out-standard-ratio').innerText;
+      const novaMain = document.getElementById('out-nova-main').innerText;
+      const novaAlt = document.getElementById('out-nova-alt').innerText;
+      const ports = document.getElementById('out-proc-ports').innerText;
+      const kw = document.getElementById('out-power-max-kw').innerText;
+      const avgKw = document.getElementById('out-power-avg-kw').innerText;
+      const current1P = document.getElementById('out-current-1p').innerText;
+      const current3P = document.getElementById('out-current-3p').innerText;
+      const mcb3P = document.getElementById('out-mcb-3p').innerText;
+
+      if (currentLang === 'id') {
+        const buildType = isCabinet ? `kabinet ukuran ${cabVal}mm` : `modul`;
+        currentAITextRaw = `Halo! Ini hasil kalkulasi teknis videotron dari sistem cerdas Bang Mbong. Kita bedah spesifikasinya biar eksekusi proyek kamu presisi dan aman. 🚀\n\n` +
+          `**1. Visual & Hardware**\n` +
+          `Layar ini dibangun menggunakan ${buildType} dengan spesifikasi ${pitchText}. Dengan dimensi fisik ${sizeStr} (luas ${area}), kita dapat resolusi murni di angka ${resW} x ${resH} pixel. Total kerapatan pikselnya mencapai ${totPx} dots. Artinya? Gambar bakal super tajam dan optimal kalau audiens melihat dari jarak minimal ${pitchNum} meter. Pastikan tim desain render konten persis di resolusi ini biar hasilnya maksimal!\n\n` +
+          `**2. Aspek Rasio & Konten**\n` +
+          `Rasio aktual layar ini ada di ${ratio} (${ratioName}). ` +
+          (ratioName !== 'Custom' ? `Mantap, ini rasio standar industri! Mutar video umum dijamin proporsional, bebas dari efek *stretch* (melar) atau *letterbox* (pinggiran hitam).\n\n` : `Karena ini ukuran 'Custom', tim visual wajib banget *lock* resolusi render di ${resW} x ${resH} pixel. Kalau nggak, gambar berisiko gepeng atau distorsi.\n\n`) +
+          `**3. Engine & Control System**\n` +
+          `Buat ngangkat jutaan piksel ini tanpa *lag* atau *frame drop*, rekomendasi *Video Processor* utama kita adalah **${novaMain}** (opsi alternatif: ${novaAlt}). Hardware ini sanggup memproses data seberat ${totPx} pixel dengan mulus. Kamu butuh **${ports}** untuk distribusi sinyalnya. *Pro tip:* Rancang topologi kabel data (RJ45) se-efisien mungkin dan sisakan minimal 1 port kosong untuk *redundancy* (jalur *backup*).\n\n` +
+          `**4. Rekayasa Daya (Kelistrikan)**\n` +
+          `Ini part paling krusial buat *safety*. Layar akan menarik daya puncak (Peak Power) sekitar ${kw} kW saat tes warna putih *full*, tapi santai, rata-rata konsumsi harian saat mutar video cuma di kisaran ${avgKw} kW.\n` +
+          (parseFloat(current1P) > 20 ? `🚨 **CRITICAL WARNING:** Beban arusnya cukup ekstrem, tembus ${current1P}A di jalur 1 Fasa. **Sangat tidak disarankan** pakai listrik 220V biasa karena rawan *overheat* dan trip. Wajib *upgrade* ke panel 3 Fasa (380V) biar beban terdistribusi merata jadi cuma ${current3P}A per fasa. Amankan dengan MCB ${mcb3P} biar instalasi bebas risiko.\n\n` : `✅ **STATUS AMAN:** Beban arus masih rileks di angka ${current1P}A. Pakai kelistrikan standar 1 Fasa (220V) sudah sangat aman dan mumpuni untuk *setup* ini.\n\n`) +
+          `Semoga data teknis ini mempermudah proses instalasi kamu. Butuh *troubleshooting* lebih lanjut? Tinggal kontak Bang Mbong. 🍻\n` +
+          `-- Mbong AI --`;
+      } else if (currentLang === 'en') {
+        const buildType = isCabinet ? `${cabVal}mm cabinets` : `modules`;
+        currentAITextRaw = `Hello! Here is the technical calculation for your LED display powered by Bang Mbong's engine. Let's break down the specs to ensure a precise and safe execution. 🚀\n\n` +
+          `**1. Visual & Hardware**\n` +
+          `We're deploying this screen using ${buildType} specified at ${pitchText}. With physical dimensions of ${sizeStr} (total area: ${area}), the native resolution locks in at ${resW} x ${resH} pixels. That’s a total density of ${totPx} dots. What does this mean? The display will deliver ultra-sharp visuals when viewed from an optimal distance of ${pitchNum} meters and beyond. Make sure your design team renders content exactly to this resolution!\n\n` +
+          `**2. Aspect Ratio & Content Layout**\n` +
+          `This display features a ${ratio} aspect ratio (${ratioName}). ` +
+          (ratioName !== 'Custom' ? `Great news, this is an industry standard! Playing standard video content will be perfectly proportional—no awkward stretching or black bars (letterboxing).\n\n` : `Since we're dealing with a 'Custom' aspect ratio, your visual team absolutely must lock their render settings to ${resW} x ${resH} pixels to avoid any squished or distorted imagery.\n\n`) +
+          `**3. Engine & Control System**\n` +
+          `To drive millions of pixels smoothly without latency or dropped frames, our primary recommended *Video Processor* is the **${novaMain}** (alternative option: ${novaAlt}). This hardware easily handles the ${totPx}-pixel data load. You will need **${ports}** for signal distribution. *Pro tip:* Optimize your RJ45 data cable topology and always try to leave at least 1 port empty for redundancy (backup routing).\n\n` +
+          `**4. Power Engineering (Electrical)**\n` +
+          `This is the most critical part for safety. The display will hit a Peak Power draw of around ${kw} kW during a 100% full-white test, but don't worry, the average daily consumption during normal video playback is only about ${avgKw} kW.\n` +
+          (parseFloat(current1P) > 20 ? `🚨 **CRITICAL WARNING:** The current draw is heavily concentrated, reaching ${current1P}A on a single phase. It is **highly discouraged** to use a standard 220V setup as it poses severe overheating and tripping risks. You MUST upgrade to a 3-Phase (380V) distribution panel to balance the load down to a safe ${current3P}A per phase. Secure the setup with a ${mcb3P} MCB to ensure a hazard-free installation.\n\n` : `✅ **SAFE STATUS:** The current draw is completely relaxed at around ${current1P}A. A standard 1-Phase (220V) electrical setup is perfectly safe and highly capable for this configuration.\n\n`) +
+          `Hope this technical breakdown streamlines your installation process. Need further troubleshooting? Just reach out to Bang Mbong. 🍻\n` +
+          `-- Mbong AI --`;
+      } else if (currentLang === 'zh') {
+        const buildType = isCabinet ? `${cabVal}mm 箱体` : `模组`;
+        currentAITextRaw = `您好！这是由 Bang Mbong 智能引擎生成的 LED 显示屏技术参数计算结果。我们来详细拆解规格，确保项目执行精准且安全。🚀\n\n` +
+          `**1. 视觉与硬件**\n` +
+          `屏幕采用 ${pitchText} 规格的 ${buildType} 构建。物理尺寸为 ${sizeStr}（总面积 ${area}），原生分辨率达到精准的 ${resW} x ${resH} 像素。总像素密度高达 ${totPx} 点。这意味着在 ${pitchNum} 米以上的最佳观看距离，画面将极其锐利。请务必让设计团队按照此分辨率渲染内容以达到最佳效果！\n\n` +
+          `**2. 宽高比与内容布局**\n` +
+          `该屏幕的实际比例为 ${ratio} (${ratioName})。` +
+          (ratioName !== 'Custom' ? `太棒了，这是行业标准比例！播放常规视频保证比例完美，绝对不会出现画面拉伸或黑边（Letterboxing）。\n\n` : `由于这是“自定义”比例，您的视觉团队必须将渲染分辨率锁定为 ${resW} x ${resH} 像素，以防图像被挤压或失真。\n\n`) +
+          `**3. 核心引擎与控制系统**\n` +
+          `为了无延迟、零掉帧地驱动这几百万像素，我们主推的视频处理器是 **${novaMain}**（备选方案：${novaAlt}）。该硬件能丝滑处理 ${totPx} 像素的数据负载。在信号分配上，您需要 **${ports}**。*专业建议*：优化网线 (RJ45) 走线拓扑，并尽量保留至少 1 个空闲网口作为冗余备份。\n\n` +
+          `**4. 电力工程 (安全建议)**\n` +
+          `这是关乎安全的最关键部分。屏幕在全白测试时的峰值功耗约为 ${kw} kW，但请放心，日常播放视频的平均功耗仅在 ${avgKw} kW 左右。\n` +
+          (parseFloat(current1P) > 20 ? `🚨 **严重警告**：单相电流负载过高，达到惊人的 ${current1P}A。**极不建议**使用普通的 220V 单相电，这会带来严重的过热和跳闸风险。您必须升级至三相 (380V) 配电柜，将负载均衡至每相安全的 ${current3P}A。搭配 ${mcb3P} 断路器以确保用电绝对安全。\n\n` : `✅ **状态安全**：当前电流仅约为 ${current1P}A，处于非常放松的状态。标准的单相 (220V) 供电系统对该配置来说已经非常安全且完全胜任。\n\n`) +
+          `希望这些技术数据能让您的安装过程更顺畅。如果需要进一步的故障排除支持，随时联系 Bang Mbong。🍻\n` +
+          `-- Mbong AI --`;
+      }
+    }
+
+    function openAIModal() {
+      document.getElementById('ai-modal').classList.remove('hidden');
+      document.getElementById('ai-text').innerHTML = '';
+      if(aiTypingTimeout) clearTimeout(aiTypingTimeout);
+      generateAIText();
+    }
+
+    function closeAIModal() {
+      document.getElementById('ai-modal').classList.add('hidden');
+      if(aiTypingTimeout) clearTimeout(aiTypingTimeout);
+    }
+
+    function copyAIText() {
+      if(!currentAITextRaw) return;
+      navigator.clipboard.writeText(currentAITextRaw).then(() => { 
+        showToast(currentLang === 'zh' ? "复制成功！" : (currentLang === 'en' ? "Copied successfully!" : "Berhasil disalin!")); 
+      })
+      .catch(err => {
+        const ta = document.createElement('textarea'); ta.value = currentAITextRaw; document.body.appendChild(ta);
+        ta.select(); document.execCommand('copy'); document.body.removeChild(ta); 
+        showToast(currentLang === 'zh' ? "复制成功！" : (currentLang === 'en' ? "Copied successfully!" : "Berhasil disalin!"));
+      });
+    }
+
+    function sendAIWhatsAppShare() {
+      if(!currentAITextRaw) return;
+      const text = encodeURIComponent(currentAITextRaw);
+      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+    }
+
+    function generateAIText() {
+      generateAITextForSharing(); 
+      typeWriter(currentAITextRaw, 0);
+    }
+
+    function typeWriter(text, i) {
+      if (i < text.length) {
+        let char = text.charAt(i);
+        if (char === '\n') { document.getElementById('ai-text').innerHTML += '<br>'; } 
+        else { document.getElementById('ai-text').innerHTML += char; }
+        aiTypingTimeout = setTimeout(function() { typeWriter(text, i + 1) }, 5);
+      }
+    }
+    
+    window.onload = function() { populatePitchOptions(); calculate(); };
+    
+    // ==========================================
+    // LOGIKA FITUR BARU: SMART RATIO
+    // ==========================================
+    (() => {
+        const SR_DOM = {
+            pitch: document.getElementById('sr-pitch'),
+            mW: document.getElementById('sr-mw'),
+            mH: document.getElementById('sr-mh'),
+            pxW: document.getElementById('sr-pxw'),
+            pxH: document.getElementById('sr-pxh'),
+            rW: document.getElementById('sr-rw'),
+            rH: document.getElementById('sr-rh'),
+            outFinal: document.getElementById('sr-out-res')
+        };
+        
+        window.resetSmartRatio = () => {
+            SR_DOM.pxW.value = "";
+            SR_DOM.pxH.value = "";
+            SR_DOM.rW.value = "";
+            SR_DOM.rH.value = "";
+            SR_DOM.mW.value = "";
+            SR_DOM.mH.value = "";
+            SR_DOM.outFinal.innerText = "0 x 0";
+        };
+
+        const getModSR = () => {
+            let key = SR_DOM.pitch.value;
+            if(key === "3.91") key = "3.91-in"; 
+            if(key === "3") key = "3.076-in";
+            let dbMod = LED_MODULE_DATABASE[key];
+            
+            let pitchNum = parseFloat(key);
+            let cabSelect = document.getElementById('cabinet');
+            let cabVal = cabSelect ? cabSelect.value : "custom";
+            
+            if (cabVal !== "custom") {
+                let cw = 0, ch = 0;
+                let isValidCab = false;
+                
+                if (cabVal === "600" && dbMod.type === 'indoor' && pitchNum <= 2.5) { cw = 600; ch = 337.5; isValidCab = true; }
+                else if (cabVal === "640" && dbMod.type === 'indoor' && pitchNum <= 2.5) { cw = 640; ch = 480; isValidCab = true; }
+                else if (cabVal === "480" && dbMod.type === 'indoor' && pitchNum <= 2.5) { cw = 480; ch = 480; isValidCab = true; }
+                else if (cabVal === "640x640") { cw = 640; ch = 640; isValidCab = true; }
+                else if (cabVal === "960x960") { cw = 960; ch = 960; isValidCab = true; }
+                
+                if (isValidCab) {
+                    return { 
+                        w: cw, 
+                        h: ch, 
+                        pxW: Math.round(cw / pitchNum), 
+                        pxH: Math.round(ch / pitchNum) 
+                    };
+                }
+            }
+            
+            return { w: dbMod.widthMm, h: dbMod.heightMm, pxW: dbMod.pixelW, pxH: dbMod.pixelH };
+        };
+
+        const gcd = (a, b) => b === 0 ? (a === 0 ? 1 : a) : gcd(b, a % b);
+
+        const updateDisplays = () => {
+            let w = parseInt(SR_DOM.pxW.value);
+            let h = parseInt(SR_DOM.pxH.value);
+            let wStr = isNaN(w) ? "0" : w;
+            let hStr = isNaN(h) ? "0" : h;
+            SR_DOM.outFinal.innerText = `${wStr} x ${hStr}`;
+        };
+
+        const autoUpdateRatio = () => {
+            let w = parseInt(SR_DOM.pxW.value);
+            let h = parseInt(SR_DOM.pxH.value);
+            
+            if (!isNaN(w) && !isNaN(h)) {
+                let divisor = gcd(w, h);
+                SR_DOM.rW.value = w / divisor;
+                SR_DOM.rH.value = h / divisor;
+            } else if (isNaN(w) && isNaN(h)) {
+                SR_DOM.rW.value = "";
+                SR_DOM.rH.value = "";
+            }
+        };
+
+        const syncFromPixel = (isWidth) => {
+            let mod = getModSR();
+            if (isWidth) {
+                let px = parseInt(SR_DOM.pxW.value);
+                if (!isNaN(px)) {
+                    SR_DOM.mW.value = (px / mod.pxW) * (mod.w / 1000);
+                } else {
+                    SR_DOM.mW.value = "";
+                }
+            } else {
+                let px = parseInt(SR_DOM.pxH.value);
+                if (!isNaN(px)) {
+                    SR_DOM.mH.value = (px / mod.pxH) * (mod.h / 1000);
+                } else {
+                    SR_DOM.mH.value = "";
+                }
+            }
+            
+            let rw = parseFloat(SR_DOM.rW.value);
+            let rh = parseFloat(SR_DOM.rH.value);
+            
+            if (!isNaN(rw) && !isNaN(rh)) {
+                syncFromRatio();
+            } else {
+                updateDisplays();
+                autoUpdateRatio();
+            }
+        };
+
+        const syncFromRatio = () => {
+            let rw = parseFloat(SR_DOM.rW.value);
+            let rh = parseFloat(SR_DOM.rH.value);
+            let px_w = parseInt(SR_DOM.pxW.value);
+            let px_h = parseInt(SR_DOM.pxH.value);
+            
+            if (!isNaN(rw) && !isNaN(rh)) {
+                let mod = getModSR();
+                
+                if ((!isNaN(px_h) && document.activeElement === SR_DOM.pxH) || (!isNaN(px_h) && isNaN(px_w))) {
+                    if (rh === 0 || px_h === 0) {
+                        SR_DOM.pxW.value = 0;
+                        SR_DOM.mW.value = 0;
+                    } else {
+                        let theoreticalPxW = (px_h / rh) * rw;
+                        let modCountW = Math.max(1, Math.round(theoreticalPxW / mod.pxW));
+                        SR_DOM.pxW.value = modCountW * mod.pxW;
+                        SR_DOM.mW.value = modCountW * (mod.w / 1000);
+                    }
+                } 
+                else if (!isNaN(px_w)) {
+                    if (rw === 0 || px_w === 0) {
+                        SR_DOM.pxH.value = 0;
+                        SR_DOM.mH.value = 0;
+                    } else {
+                        let theoreticalPxH = (px_w / rw) * rh;
+                        let modCountH = Math.max(1, Math.round(theoreticalPxH / mod.pxH));
+                        SR_DOM.pxH.value = modCountH * mod.pxH;
+                        SR_DOM.mH.value = modCountH * (mod.h / 1000);
+                    }
+                }
+                
+                updateDisplays();
+            }
+        };
+
+        const refreshAll = () => {
+            if (SR_DOM.mW.value !== "" || SR_DOM.mH.value !== "") {
+                syncFromPixel(true);
+                syncFromPixel(false);
+            }
+        };
+
+        SR_DOM.pitch.addEventListener('change', refreshAll);
+        SR_DOM.pxW.addEventListener('input', () => syncFromPixel(true));
+        SR_DOM.pxH.addEventListener('input', () => syncFromPixel(false));
+        SR_DOM.rW.addEventListener('input', syncFromRatio);
+        SR_DOM.rH.addEventListener('input', syncFromRatio);
+    })();
+
+    // ==========================================
+    // EFEK ANIMASI SENTUHAN & RIPPLE
+    // ==========================================
+    document.addEventListener('pointerdown', function(e) {
+        const target = e.target.closest('button, a[href]');
+        if (!target) return;
+
+        const style = window.getComputedStyle(target);
+        if (style.position === 'static') target.style.position = 'relative';
+
+        const rect = target.getBoundingClientRect();
+        const circle = document.createElement('span');
+        const diameter = Math.max(rect.width, rect.height);
+        const radius = diameter / 2;
+
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${e.clientX - rect.left - radius}px`;
+        circle.style.top = `${e.clientY - rect.top - radius}px`;
+        
+        const isLightBg = target.classList.contains('bg-white') || 
+                          target.classList.contains('bg-slate-50') || 
+                          target.classList.contains('bg-slate-100') || 
+                          style.backgroundColor === 'rgb(255, 255, 255)' ||
+                          style.backgroundColor === 'rgba(0, 0, 0, 0)';
+                          
+        circle.style.backgroundColor = isLightBg ? 'rgba(14, 165, 233, 0.1)' : 'rgba(255, 255, 255, 0.3)';
+        circle.classList.add('ripple-effect');
+
+        const existing = target.querySelectorAll('.ripple-effect');
+        existing.forEach(el => el.remove());
+
+        target.appendChild(circle);
+
+        setTimeout(() => {
+            circle.remove();
+        }, 600);
+    });
+  </script>
+
+</body></html>
