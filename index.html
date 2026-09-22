@@ -2,7 +2,7 @@
 <html lang="id"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>MBONG CALCULATOR PRO - Precision Engineering V4.1</title>
+  <title>MBONG CALCULATOR PRO - Precision Engineering V4.3</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -42,7 +42,6 @@
     .animated-bg {
         position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -3;
         background-color: #f8fafc;
-        /* Pola grid dan titik solder yang lebih soft */
         background-image: 
             radial-gradient(circle at 50px 50px, rgba(14, 165, 233, 0.1) 4px, transparent 5px),
             radial-gradient(circle at 150px 100px, rgba(217, 119, 6, 0.08) 6px, transparent 7px),
@@ -79,7 +78,6 @@
         overflow: hidden;
     }
     
-    /* Aksen Jalur Tembaga/Sirkuit di Ujung Card */
     .glass-card::before {
         content: ''; position: absolute; top: 0; left: 20px; width: 40px; height: 4px;
         background: linear-gradient(90deg, #0ea5e9, #22d3ee);
@@ -122,16 +120,15 @@
 
     /* LED Matrix Visual Box - KOTAK VIDEOTRON REALISTIS */
     .led-matrix-bg {
-        background-color: #020617; /* Dasar gelap */
+        background-color: #020617; 
         background-image: radial-gradient(circle, #1e293b 1px, transparent 1px);
         background-size: 4px 4px;
-        border-radius: 2px; /* Kaku/boxy seperti kabinet asli */
-        border: 3px solid #334155; /* Bezel kabinet luar */
+        border-radius: 2px; 
+        border: 3px solid #334155; 
         box-shadow: inset 0 0 8px rgba(0,0,0,0.8), 0 5px 15px -5px rgba(0,0,0,0.3);
         position: relative;
     }
     
-    /* Garis Kabinet (Simulasi pembagian kabinet di layar) */
     .led-matrix-bg::after {
         content: '';
         position: absolute;
@@ -185,8 +182,7 @@
        REALISTIC PCB MODUL PROFILE EFFECT
        ========================================= */
     .modal-pcb-bg {
-        background-color: #0d4732; /* Base PCB Green */
-        /* Custom SVG Pattern for realistic traces and gold vias */
+        background-color: #0d4732;
         background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20 h 40 l 20 20 v 40 l -20 20 h -20 l -20 -20 z M100 40 v 40 l 20 20 h 20 M40 140 h 40 l 20 -20 v -20 M140 20 l -20 20 v 30 l -20 20 M10 80 h 20 l 20 -20 M120 140 v -20 l -20 -20' fill='none' stroke='rgba(52, 211, 153, 0.3)' stroke-width='4' stroke-linejoin='round'/%3E%3Ccircle cx='20' cy='20' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='60' cy='20' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='80' cy='40' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='80' cy='80' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='60' cy='100' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='40' cy='100' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='20' cy='80' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='100' cy='40' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='140' cy='80' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='40' cy='140' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='80' cy='140' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='100' cy='120' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='140' cy='20' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='10' cy='80' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3Ccircle cx='120' cy='140' r='4' fill='%23022c22' stroke='%23fbbf24' stroke-width='2'/%3E%3C/svg%3E");
         box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.9), 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         border: 2px solid #041c13;
@@ -194,7 +190,6 @@
         overflow: hidden;
     }
 
-    /* Teks Cetakan Putih (Silkscreen) */
     .pcb-silkscreen {
         position: absolute;
         color: rgba(255, 255, 255, 0.8);
@@ -206,7 +201,6 @@
         pointer-events: none;
     }
 
-    /* Bodi IC (Integrated Circuit) */
     .ic-chip {
         position: absolute;
         background-color: #111827;
@@ -221,7 +215,6 @@
         justify-content: center;
     }
     
-    /* Kaki IC (Pins) Perak */
     .ic-vertical .pins-left, .ic-vertical .pins-right {
         position: absolute;
         top: 4px; bottom: 4px; width: 5px;
@@ -240,7 +233,6 @@
     .ic-horizontal .pins-top { top: -5px; border-radius: 2px 2px 0 0; box-shadow: 0 -1px 3px rgba(0,0,0,0.5); }
     .ic-horizontal .pins-bottom { bottom: -5px; border-radius: 0 0 2px 2px; box-shadow: 0 2px 3px rgba(0,0,0,0.5); }
 
-    /* Cetakan Laser di Atas IC */
     .ic-text {
         color: rgba(255, 255, 255, 0.25);
         font-family: 'Courier New', Courier, monospace;
@@ -250,7 +242,6 @@
     }
     .ic-text.vert { writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); }
 
-    /* Titik Indikator Pin 1 */
     .ic-dot {
         position: absolute;
         width: 4px; height: 4px;
@@ -258,11 +249,10 @@
         border-radius: 50%;
     }
 
-    /* Komponen SMD (Resistor & Kapasitor) */
     .smd-comp {
         position: absolute;
         width: 6px; height: 12px;
-        background-color: #1c1917; /* Bodi hitam untuk resistor */
+        background-color: #1c1917;
         box-shadow: 0 3px 5px rgba(0,0,0,0.6);
         z-index: 1;
         border-radius: 0.5px;
@@ -270,12 +260,12 @@
     .smd-comp::before, .smd-comp::after {
         content: ''; position: absolute;
         left: 0; right: 0; height: 2.5px;
-        background: linear-gradient(90deg, #94a3b8, #f8fafc, #94a3b8); /* Solder perak */
+        background: linear-gradient(90deg, #94a3b8, #f8fafc, #94a3b8);
     }
     .smd-comp::before { top: -0.5px; border-radius: 1px 1px 0 0; }
     .smd-comp::after { bottom: -0.5px; border-radius: 0 0 1px 1px; }
     
-    .smd-cap { background-color: #a0522d; /* Bodi coklat keramik untuk kapasitor */ width: 8px; height: 14px;}
+    .smd-cap { background-color: #a0522d; width: 8px; height: 14px;}
     .smd-cap::before, .smd-cap::after { height: 3px; }
 
     .smd-h { transform: rotate(90deg); }
@@ -309,7 +299,7 @@
           <h1 class="font-black text-[14px] sm:text-[20px] md:text-[22px] tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-slate-700 to-slate-900 leading-tight whitespace-nowrap">
             MBONG CALCULATOR <span class="text-cyan-500 font-mono">PRO</span>
           </h1>
-          <p id="t-subtitle" onclick="openAboutModal()" class="text-[10px] sm:text-[12px] text-slate-500 font-medium tracking-wide truncate max-w-[160px] sm:max-w-none mt-0.5 cursor-pointer hover:text-cyan-600 transition-colors">Sistem Kalkulasi Resolusi, Video Processor &amp; Rekayasa Daya Videotron V4.1</p>
+          <p id="t-subtitle" onclick="openAboutModal()" class="text-[10px] sm:text-[12px] text-slate-500 font-medium tracking-wide truncate max-w-[160px] sm:max-w-none mt-0.5 cursor-pointer hover:text-cyan-600 transition-colors">Sistem Kalkulasi Resolusi, Video Processor &amp; Rekayasa Daya Videotron V4.3</p>
         </div>
       </div>
 
@@ -384,9 +374,9 @@
               <div>
                 <label id="t-cabinet-label" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Pixel Pitch &amp; Tipe Kabinet</label>
                 <select id="cabinet" onchange="calculate()" class="w-full rounded-2xl px-4 py-3.5 text-[13px] font-bold cursor-pointer shadow-sm text-slate-700">
-                  <option value="600">P0.9 - P2.5 Indoor (600×337.5mm)</option>
-                  <option value="640">P0.9 - P2.5 Indoor (640×480mm)</option>
-                  <option value="480">P0.9 - P2.5 Indoor (480×480mm)</option>
+                  <option id="opt-cab-600" value="600">P0.9 - P2.5 Indoor (600×337.5mm)</option>
+                  <option id="opt-cab-640-in" value="640">P0.9 - P2.5 Indoor (640×480mm)</option>
+                  <option id="opt-cab-480-in" value="480">P0.9 - P2.5 Indoor (480×480mm)</option>
                   <option id="opt-cab-640" value="640x640">Kabinet 640x640</option>
                   <option id="opt-cab-960" value="960x960">Kabinet 960x960</option>
                   <option id="opt-cab-custom" value="custom" selected>Tanpa Kabinet / Custom</option>
@@ -739,7 +729,7 @@
       <div class="pcb-silkscreen" style="bottom: 110px; right: 20px;">U2</div>
       <div class="pcb-silkscreen" style="top: 20px; right: 40px; transform: rotate(90deg);">C12</div>
       <div class="pcb-silkscreen" style="bottom: 40px; left: 80px;">R45</div>
-      <div class="pcb-silkscreen" style="bottom: 20px; right: 20px;">REV 4.1</div>
+      <div class="pcb-silkscreen" style="bottom: 20px; right: 20px;">REV 4.3</div>
 
       <!-- Realstic IC Chips -->
       <div class="ic-chip ic-vertical w-12 h-16 top-8 left-8">
@@ -778,7 +768,7 @@
           <p id="t-prof-desc" class="text-[10px] text-emerald-200 font-bold uppercase tracking-widest">Videotron Engineer</p>
         </div>
         
-        <a href="https://wa.me/628158855537?text=Halo%20Bang%20Mbong,%20ada%20yang%20mau%20saya%20konsultasikan%20mengenai%20videotron" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-4 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all mt-2">
+        <a id="wa-link" href="#" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-4 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all mt-2">
           <span class="text-lg">💬</span> <span id="t-prof-wa">Hubungi WhatsApp</span>
         </a>
 
@@ -867,16 +857,20 @@
     // ==========================================
     const DICTIONARY = {
       id: {
-        subtitle: "Sistem Kalkulasi Resolusi, Video Processor & Rekayasa Daya Videotron V4.1",
+        subtitle: "Sistem Kalkulasi Resolusi, Video Processor & Rekayasa Daya Videotron V4.3",
         dim_title: "Dimensi & Modul",
         pitch_label: "Pixel Pitch & Tipe Modul",
         cabinet_label: "Pixel Pitch & Tipe Kabinet",
+        opt_cab_600: "P0.9 - P2.5 Indoor (600×337.5mm)",
+        opt_cab_640_in: "P0.9 - P2.5 Indoor (640×480mm)",
+        opt_cab_480_in: "P0.9 - P2.5 Indoor (480×480mm)",
         opt_cab_640: "Kabinet 640x640",
         opt_cab_960: "Kabinet 960x960",
         opt_cab_custom: "Tanpa Kabinet / Custom",
         width_label: "Lebar Layar (Target)",
         height_label: "Tinggi Layar (Target)",
-        matrix: "Matriks Modul:",
+        matrix_cabinet: "Matriks Kabinet:",
+        matrix_module: "Matriks Modul:",
         actual_size: "Fisik Aktual:",
         area: "Luas Area:",
         res_title: "Resolusi & Rasio",
@@ -903,7 +897,7 @@
         genset: "Genset Min (80%):",
         area_watt: "Beban per m²: ",
         apparent: "Apparent Power: ",
-        prof_title: "⚙️ PROFIL KONSULTAN",
+        prof_title: "PROFIL KONSULTAN",
         prof_desc: "Videotron Engineer",
         prof_wa: "Hubungi WhatsApp",
         prof_close: "Tutup",
@@ -954,27 +948,57 @@
         modal_wa_app: "Buka App WhatsApp ➔",
         modal_wa_or: "Atau Nomor Custom",
         modal_wa_send: "Kirim",
-        modal_ai_title: "⚡ Mbong AI Engine",
-        modal_ai_copy: "📋 Copy",
-        modal_ai_fw: "📲 Forward WA",
+        modal_ai_title: "Mbong AI Engine",
+        modal_ai_copy: "Copy",
+        modal_ai_fw: "Forward WA",
         modal_ai_close: "Tutup",
-        modal_about_title: "ℹ️ Info Aplikasi",
+        modal_about_title: "Info Aplikasi",
         modal_about_close: "Tutup",
         help_understand: "Mengerti",
         tooltip_help: "Bantuan",
-        admin_granted: "Akses Admin diberikan."
+        admin_granted: "Akses Admin diberikan.",
+        
+        // Technical Terms specific translates
+        call_tech: "Hubungi Teknisi",
+        ar_custom: "Custom",
+        ar_std: "16:9 Standar",
+        ar_full: "4:3 Layar Penuh",
+        ar_wide: "21:9 Ultrawide",
+        cluster_async: "Sistem Cluster Async",
+        cluster_multi: "Cluster Multi-Player",
+        splicer_dist: "Sistem Wall Terdistribusi",
+        splicer_ultra: "Splicer Ultra-Besar",
+        splicer_cluster: "Cluster Splicer",
+        splicer_casc: "Sistem Cascade",
+        wa_msg: "Halo Bang Mbong, ada yang mau saya konsultasikan mengenai videotron",
+        pole_1: "1-Pole",
+        pole_3: "3-Pole",
+        unit_cabinet: "Kabinet",
+        unit_module: "Unit",
+        load_lbl: "Beban",
+        max_lbl: "Maks",
+        port_rj45: "Port RJ45",
+        cascaded: "Cascade",
+        status_safe: "Aman",
+        status_warn: "Rawan",
+        status_high: "Beban Tinggi",
+        status_rec: "Saran"
       },
       en: {
-        subtitle: "Resolution, Processor & Power Engineering V4.1",
+        subtitle: "Resolution, Processor & Power Engineering V4.3",
         dim_title: "Dimensions",
         pitch_label: "Pixel Pitch & Module Type",
         cabinet_label: "Pixel Pitch & Cabinet Type",
+        opt_cab_600: "P0.9 - P2.5 Indoor (600×337.5mm)",
+        opt_cab_640_in: "P0.9 - P2.5 Indoor (640×480mm)",
+        opt_cab_480_in: "P0.9 - P2.5 Indoor (480×480mm)",
         opt_cab_640: "640x640 Cabinet",
         opt_cab_960: "960x960 Cabinet",
         opt_cab_custom: "No Cabinet / Custom",
         width_label: "Target Width",
         height_label: "Target Height",
-        matrix: "Module Matrix:",
+        matrix_cabinet: "Cabinet Matrix:",
+        matrix_module: "Module Matrix:",
         actual_size: "Actual Size:",
         area: "Surface Area:",
         res_title: "Resolution & Ratio",
@@ -1001,7 +1025,7 @@
         genset: "Min Genset (80%):",
         area_watt: "Load per m²: ",
         apparent: "Apparent Power: ",
-        prof_title: "⚙️ CONSULTANT PROFILE",
+        prof_title: "CONSULTANT PROFILE",
         prof_desc: "Videotron Engineer",
         prof_wa: "Contact WhatsApp",
         prof_close: "Close",
@@ -1052,27 +1076,56 @@
         modal_wa_app: "Open WhatsApp App ➔",
         modal_wa_or: "Or Custom Number",
         modal_wa_send: "Send",
-        modal_ai_title: "⚡ Mbong AI Engine",
-        modal_ai_copy: "📋 Copy",
-        modal_ai_fw: "📲 Forward WA",
+        modal_ai_title: "Mbong AI Engine",
+        modal_ai_copy: "Copy",
+        modal_ai_fw: "Forward WA",
         modal_ai_close: "Close",
-        modal_about_title: "ℹ️ App Info",
+        modal_about_title: "App Info",
         modal_about_close: "Close",
         help_understand: "Understood",
         tooltip_help: "Help",
-        admin_granted: "Admin access granted."
+        admin_granted: "Admin access granted.",
+        
+        call_tech: "Contact Technician",
+        ar_custom: "Custom",
+        ar_std: "16:9 Standard",
+        ar_full: "4:3 Fullscreen",
+        ar_wide: "21:9 Ultrawide",
+        cluster_async: "Async Cluster System",
+        cluster_multi: "Multi-Player Cluster",
+        splicer_dist: "Distributed Wall System",
+        splicer_ultra: "Ultra-Large Splicer",
+        splicer_cluster: "Splicer Cluster",
+        splicer_casc: "Cascade System",
+        wa_msg: "Hello Bang Mbong, I would like to consult about a videotron project",
+        pole_1: "1-Pole",
+        pole_3: "3-Pole",
+        unit_cabinet: "Cabinet(s)",
+        unit_module: "Unit(s)",
+        load_lbl: "Load",
+        max_lbl: "Max",
+        port_rj45: "Ports RJ45",
+        cascaded: "Cascaded",
+        status_safe: "Safe",
+        status_warn: "Warning",
+        status_high: "High Load",
+        status_rec: "Recommended"
       },
       zh: {
-        subtitle: "LED屏幕分辨率、视频处理器与电力计算 V4.1",
+        subtitle: "LED屏幕分辨率、视频处理器与电力计算 V4.3",
         dim_title: "尺寸与模组",
         pitch_label: "像素间距",
         cabinet_label: "像素间距与箱体类型",
+        opt_cab_600: "P0.9 - P2.5 室内 (600×337.5mm)",
+        opt_cab_640_in: "P0.9 - P2.5 室内 (640×480mm)",
+        opt_cab_480_in: "P0.9 - P2.5 室内 (480×480mm)",
         opt_cab_640: "640x640 箱体",
         opt_cab_960: "960x960 箱体",
         opt_cab_custom: "无箱体 / 自定义",
         width_label: "目标宽度",
         height_label: "目标高度",
-        matrix: "模组矩阵:",
+        matrix_cabinet: "箱体矩阵:",
+        matrix_module: "模组矩阵:",
         actual_size: "实际尺寸:",
         area: "面积:",
         res_title: "分辨率与比例",
@@ -1099,7 +1152,7 @@
         genset: "最低发电机 (80%):",
         area_watt: "每平米负荷: ",
         apparent: "视在功率: ",
-        prof_title: "⚙️ 顾问简介",
+        prof_title: "顾问简介",
         prof_desc: "LED工程师",
         prof_wa: "WhatsApp联系",
         prof_close: "关闭",
@@ -1150,15 +1203,40 @@
         modal_wa_app: "打开 WhatsApp 应用 ➔",
         modal_wa_or: "或自定义号码",
         modal_wa_send: "发送",
-        modal_ai_title: "⚡ Mbong AI 引擎",
-        modal_ai_copy: "📋 复制",
-        modal_ai_fw: "📲 转发 WA",
+        modal_ai_title: "Mbong AI 引擎",
+        modal_ai_copy: "复制",
+        modal_ai_fw: "转发 WA",
         modal_ai_close: "关闭",
-        modal_about_title: "ℹ️ 应用信息",
+        modal_about_title: "应用信息",
         modal_about_close: "关闭",
         help_understand: "明白",
         tooltip_help: "帮助",
-        admin_granted: "管理员权限已授予。"
+        admin_granted: "管理员权限已授予。",
+        
+        call_tech: "联系技术人员",
+        ar_custom: "自定义",
+        ar_std: "16:9 标准",
+        ar_full: "4:3 全屏",
+        ar_wide: "21:9 超宽",
+        cluster_async: "异步集群系统",
+        cluster_multi: "多播放器集群",
+        splicer_dist: "分布式拼接系统",
+        splicer_ultra: "超大型拼接器",
+        splicer_cluster: "拼接器集群",
+        splicer_casc: "级联系统",
+        wa_msg: "你好 Bang Mbong，我想咨询一下关于LED屏幕的问题",
+        pole_1: "单极",
+        pole_3: "三极",
+        unit_cabinet: "箱体",
+        unit_module: "块",
+        load_lbl: "负载",
+        max_lbl: "最大",
+        port_rj45: "个RJ45网口",
+        cascaded: "级联",
+        status_safe: "安全",
+        status_warn: "临界",
+        status_high: "高负载",
+        status_rec: "推荐"
       }
     };
 
@@ -1362,6 +1440,7 @@
     }
 
     function getCableSize1P(mcb) {
+      const dict = DICTIONARY[currentLang];
       if (mcb <= 10) return "3 × 1.5 mm²";
       if (mcb <= 16) return "3 × 2.5 mm²";
       if (mcb <= 25) return "3 × 4.0 mm²";
@@ -1371,10 +1450,11 @@
       if (mcb <= 80) return "3 × 25.0 mm²";
       if (mcb <= 100) return "3 × 35.0 mm²";
       if (mcb <= 125) return "3 × 50.0 mm²";
-      return "Hubungi Teknisi";
+      return dict.call_tech;
     }
 
     function getCableSize3P(mcb) {
+      const dict = DICTIONARY[currentLang];
       if (mcb <= 10) return "5 × 1.5 mm²";
       if (mcb <= 16) return "5 × 2.5 mm²";
       if (mcb <= 25) return "5 × 4.0 mm²";
@@ -1384,7 +1464,7 @@
       if (mcb <= 80) return "5 × 25.0 mm²";
       if (mcb <= 100) return "5 × 35.0 mm²";
       if (mcb <= 125) return "5 × 50.0 mm²";
-      return "Hubungi Teknisi";
+      return dict.call_tech;
     }
 
     function populatePitchOptions() {
@@ -1444,10 +1524,15 @@
       document.getElementById('t-dim-title').innerHTML = `<span>📐</span> ${dict.dim_title}`;
       document.getElementById('t-pitch-label').innerText = dict.pitch_label;
       
-      // Update the new cabinet labels
       if (document.getElementById('t-cabinet-label')) {
           document.getElementById('t-cabinet-label').innerText = dict.cabinet_label;
       }
+      
+      // Dynamic Cabinet Translation
+      if (document.getElementById('opt-cab-600')) document.getElementById('opt-cab-600').innerText = dict.opt_cab_600;
+      if (document.getElementById('opt-cab-640-in')) document.getElementById('opt-cab-640-in').innerText = dict.opt_cab_640_in;
+      if (document.getElementById('opt-cab-480-in')) document.getElementById('opt-cab-480-in').innerText = dict.opt_cab_480_in;
+      
       if (document.getElementById('opt-cab-640')) {
           document.getElementById('opt-cab-640').innerText = dict.opt_cab_640;
       }
@@ -1460,6 +1545,9 @@
       
       document.getElementById('t-width-label').innerText = dict.width_label;
       document.getElementById('t-height-label').innerText = dict.height_label;
+      
+      if (document.getElementById('t-lbl-actual-size')) document.getElementById('t-lbl-actual-size').innerText = dict.actual_size;
+      if (document.getElementById('t-lbl-area')) document.getElementById('t-lbl-area').innerText = dict.area;
       
       // Card 2: Resolusi
       document.getElementById('t-res-title').innerHTML = `<span>📟</span> ${dict.res_title}`;
@@ -1542,6 +1630,11 @@
       document.getElementById('t-prof-desc').innerText = dict.prof_desc;
       if (document.getElementById('t-prof-wa')) document.getElementById('t-prof-wa').innerText = dict.prof_wa;
       document.getElementById('t-prof-close').innerText = dict.prof_close;
+      
+      const waLink = document.getElementById('wa-link');
+      if(waLink) {
+          waLink.href = `https://wa.me/628158855537?text=${encodeURIComponent(dict.wa_msg)}`;
+      }
 
       document.getElementById('modal-about-title').innerHTML = `<span>ℹ️</span> ${dict.modal_about_title}`;
       document.getElementById('modal-about-close').innerText = dict.modal_about_close;
@@ -1566,6 +1659,7 @@
     }
 
     function getAccurateProcessorRecommendations(totalW, totalH, totalPx, modType, totalRC, rcPxW, rcPxH) {
+      const dict = DICTIONARY[currentLang];
       const portCap = parseFloat(document.getElementById('adm-port-cap')?.value) || 650000;
       
       // Sinkronisasi PORT berdasarkan RC yg dirangkai (1 Port maks 650k Pixel, tidak memotong mapping RC yg sedang terangkai)
@@ -1592,20 +1686,20 @@
 
       if(n_match) {
         n_main = n_match.name; n_alt = n_match.alt;
-        n_capText = `Max ${(n_match.maxPx/1000000).toFixed(1)}M px (${capLblL}: ${n_match.maxW}px, ${capLblT}: ${n_match.maxH}px)`;
+        n_capText = `${dict.max_lbl} ${(n_match.maxPx/1000000).toFixed(1)}M px (${capLblL}: ${n_match.maxW}px, ${capLblT}: ${n_match.maxH}px)`;
         n_load = Math.min(100, ((totalPx / n_match.maxPx) * 100)).toFixed(1);
       } else {
         if(targetType === 'async') {
             let count = Math.ceil(totalPx / 2300000);
             n_main = `${count}x Novastar TB60`;
-            n_alt = `Async Cluster System`;
-            n_capText = "Multi-Player Cluster";
+            n_alt = dict.cluster_async;
+            n_capText = dict.cluster_multi;
             n_load = '-';
         } else {
             let count = Math.ceil(totalPx / 15600000);
-            n_main = `${count}x Novastar VC24 (Cascaded)`;
-            n_alt = `Distributed Wall System`;
-            n_capText = "Ultra-Large Splicer";
+            n_main = `${count}x Novastar VC24 (${dict.cascaded})`;
+            n_alt = dict.splicer_dist;
+            n_capText = dict.splicer_ultra;
             n_load = '-';
         }
       }
@@ -1622,20 +1716,20 @@
       
       if(h_match) {
         h_main = h_match.name; h_alt = h_match.alt;
-        h_capText = `Max ${(h_match.maxPx/1000000).toFixed(1)}M px (${capLblL}: ${h_match.maxW}px, ${capLblT}: ${h_match.maxH}px)`;
+        h_capText = `${dict.max_lbl} ${(h_match.maxPx/1000000).toFixed(1)}M px (${capLblL}: ${h_match.maxW}px, ${capLblT}: ${h_match.maxH}px)`;
         h_load = Math.min(100, ((totalPx / h_match.maxPx) * 100)).toFixed(1);
       } else {
         if(targetType === 'async') {
             let count = Math.ceil(totalPx / 2300000);
             h_main = `${count}x Huidu HD-A6`;
-            h_alt = `Async Cluster System`;
-            h_capText = "Multi-Player Cluster";
+            h_alt = dict.cluster_async;
+            h_capText = dict.cluster_multi;
             h_load = '-';
         } else {
             let count = Math.ceil(totalPx / 10400000);
             h_main = `${count}x Huidu HD-VP1640`;
-            h_alt = `Splicer Cluster`;
-            h_capText = "Cascade System";
+            h_alt = dict.splicer_cluster;
+            h_capText = dict.splicer_casc;
             h_load = '-';
         }
       }
@@ -1645,16 +1739,18 @@
 
     function getGCD(a, b) { return b === 0 ? a : getGCD(b, a % b); }
     function getAspectRatio(w, h) {
+      const dict = DICTIONARY[currentLang];
       if(!w || !h) return { dec:"0.000", frac:"0:0", name:"-" };
       let gcd = getGCD(w,h); let n = w/gcd, d = h/gcd, r = w/h;
-      let name = "Custom";
-      if(Math.abs(r - 16/9) < 0.05) { n=16; d=9; name="16:9 Standard"; }
-      else if(Math.abs(r - 4/3) < 0.05) { n=4; d=3; name="4:3 Fullscreen"; }
-      else if(Math.abs(r - 21/9) < 0.05) { n=21; d=9; name="21:9 Ultrawide"; }
+      let name = dict.ar_custom;
+      if(Math.abs(r - 16/9) < 0.05) { n=16; d=9; name = dict.ar_std; }
+      else if(Math.abs(r - 4/3) < 0.05) { n=4; d=3; name = dict.ar_full; }
+      else if(Math.abs(r - 21/9) < 0.05) { n=21; d=9; name = dict.ar_wide; }
       return { dec: r.toFixed(3), frac: `${n}:${d}`, name };
     }
 
     function calculate() {
+      const dict = DICTIONARY[currentLang];
       const pitchKey = document.getElementById('pitch').value || "2.5";
       const mod = LED_MODULE_DATABASE[pitchKey];
       const pitchNum = parseFloat(pitchKey);
@@ -1703,12 +1799,10 @@
       const aspect = getAspectRatio(pxW, pxH);
       
       // Dynamic Labels for Matrix based on cabinet/module choice
-      let wLbl = currentLang === 'zh' ? '宽' : 'W';
-      let hLbl = currentLang === 'zh' ? '高' : 'H';
-      let uLbl = currentLang === 'zh' ? (isCabinet ? '箱体' : '块') : (isCabinet ? 'Kabinet' : 'Unit');
-      let matrixLbl = currentLang === 'zh' ? (isCabinet ? '箱体矩阵:' : '模组矩阵:') : 
-                      (currentLang === 'en' ? (isCabinet ? 'Cabinet Matrix:' : 'Module Matrix:') : 
-                      (isCabinet ? 'Matriks Kabinet:' : 'Matriks Modul:'));
+      let wLbl = currentLang === 'zh' ? 'W' : 'W';
+      let hLbl = currentLang === 'zh' ? 'H' : 'H';
+      let uLbl = isCabinet ? dict.unit_cabinet : dict.unit_module;
+      let matrixLbl = isCabinet ? dict.matrix_cabinet : dict.matrix_module;
                       
       document.getElementById('t-lbl-matrix').innerText = matrixLbl;
       document.getElementById('out-module-count').innerText = `${gridW} (${wLbl}) × ${gridH} (${hLbl}) = ${totGrid} ${uLbl}`;
@@ -1769,13 +1863,13 @@
       // Mengirimkan data RC untuk mem-validasi pemakaian port
       const proc = getAccurateProcessorRecommendations(pxW, pxH, totPx, mod.type, totalRC, rcPxW, rcPxH);
       
-      document.getElementById('proc-port-badge').innerText = `${proc.reqPorts} Port RJ45`;
-      document.getElementById('out-proc-ports').innerText = `${proc.reqPorts} Port RJ45`;
+      document.getElementById('proc-port-badge').innerText = `${proc.reqPorts} ${dict.port_rj45}`;
+      document.getElementById('out-proc-ports').innerText = `${proc.reqPorts} ${dict.port_rj45}`;
       
       document.getElementById('out-nova-main').innerText = proc.nova.main;
       document.getElementById('out-nova-alt').innerText = proc.nova.alt;
       document.getElementById('out-nova-cap').innerText = proc.nova.capText;
-      document.getElementById('out-nova-load-badge').innerText = `Load: ${proc.nova.load}%`;
+      document.getElementById('out-nova-load-badge').innerText = `${dict.load_lbl}: ${proc.nova.load}%`;
       if(proc.nova.load !== '-' && parseFloat(proc.nova.load) > 85) {
           document.getElementById('out-nova-load-badge').className = "text-[9px] font-bold px-2 py-0.5 rounded-lg bg-amber-100 text-amber-700 shadow-sm";
       } else {
@@ -1785,7 +1879,7 @@
       document.getElementById('out-hd-main').innerText = proc.hd.main;
       document.getElementById('out-hd-alt').innerText = proc.hd.alt;
       document.getElementById('out-hd-cap').innerText = proc.hd.capText;
-      document.getElementById('out-hd-load-badge').innerText = `Load: ${proc.hd.load}%`;
+      document.getElementById('out-hd-load-badge').innerText = `${dict.load_lbl}: ${proc.hd.load}%`;
       if(proc.hd.load !== '-' && parseFloat(proc.hd.load) > 85) {
           document.getElementById('out-hd-load-badge').className = "text-[9px] font-bold px-2 py-0.5 rounded-lg bg-amber-100 text-amber-700 shadow-sm";
       } else {
@@ -1810,7 +1904,7 @@
       document.getElementById('display-pf-val').innerText = pf.toFixed(2);
 
       const actualRatio = Math.round((mod.avgWattsDC / mod.maxWattsDC) * 100);
-      const baseText = DICTIONARY[currentLang].power_avg.replace('33', actualRatio);
+      const baseText = dict.power_avg.replace('33', actualRatio);
       document.getElementById('t-lbl-power-avg').innerText = baseText;
       
       const v1p = 220, v3p = 380;
@@ -1836,25 +1930,25 @@
       document.getElementById('out-va-max').innerText = Math.round(vaMax).toLocaleString('id-ID');
       
       document.getElementById('out-current-1p').innerText = current1P.toFixed(2);
-      document.getElementById('out-mcb-1p').innerText = `${mcb1P}A (1-Pole)`;
+      document.getElementById('out-mcb-1p').innerText = `${mcb1P}A (${dict.pole_1})`;
       document.getElementById('out-cable-1p').innerText = cable1P;
       
       const badge1P = document.getElementById('badge-1phase-status');
       if(current1P > 32) {
-        badge1P.innerText = currentLang === 'zh' ? "高负载" : (currentLang === 'en' ? "High Load" : "Beban Tinggi");
+        badge1P.innerText = dict.status_high;
         badge1P.className = "text-[9px] font-bold px-2 py-0.5 rounded-lg bg-red-100 text-red-600";
       } else if (current1P > 20) {
-        badge1P.innerText = currentLang === 'zh' ? "临界" : (currentLang === 'en' ? "Warning" : "Rawan");
+        badge1P.innerText = dict.status_warn;
         badge1P.className = "text-[9px] font-bold px-2 py-0.5 rounded-lg bg-amber-100 text-amber-600";
       } else {
-        badge1P.innerText = currentLang === 'zh' ? "安全" : (currentLang === 'en' ? "Safe" : "Aman");
+        badge1P.innerText = dict.status_safe;
         badge1P.className = "text-[9px] font-bold px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-600";
       }
 
-      document.getElementById('t-3p-badge').innerText = currentLang === 'zh' ? "推荐" : (currentLang === 'en' ? "Recommended" : "Disarankan");
+      document.getElementById('t-3p-badge').innerText = dict.status_rec;
 
       document.getElementById('out-current-3p').innerText = current3P.toFixed(2);
-      document.getElementById('out-mcb-3p').innerText = `${mcb3P}A (3-Pole)`;
+      document.getElementById('out-mcb-3p').innerText = `${mcb3P}A (${dict.pole_3})`;
       document.getElementById('out-cable-3p').innerText = cable3P;
       
       const gensetKVA = parseFloat(Math.max(1, (vaMax / 1000) / 0.8).toFixed(2));
