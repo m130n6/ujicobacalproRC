@@ -388,14 +388,14 @@
               <div>
                 <label id="t-width-label" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Lebar Layar</label>
                 <div class="relative">
-                  <input type="number" id="dim_width" value="32" step="0.01" min="0.001" oninput="calculate()" onkeyup="if(event.key==='Enter') this.blur();" class="w-full px-4 py-3.5 text-base font-black text-slate-800 shadow-sm no-spinners">
+                  <input type="number" inputmode="decimal" id="dim_width" value="32" step="0.01" min="0.001" oninput="calculate()" onkeyup="if(event.key==='Enter') this.blur();" class="w-full px-4 py-3.5 text-base font-black text-slate-800 shadow-sm no-spinners">
                   <span id="unit-label-w" class="absolute right-4 top-4 text-[10px] text-slate-400 font-bold uppercase">cm</span>
                 </div>
               </div>
               <div>
                 <label id="t-height-label" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Tinggi Layar</label>
                 <div class="relative">
-                  <input type="number" id="dim_height" value="16" step="0.01" min="0.001" oninput="calculate()" onkeyup="if(event.key==='Enter') this.blur();" class="w-full px-4 py-3.5 text-base font-black text-slate-800 shadow-sm no-spinners">
+                  <input type="number" inputmode="decimal" id="dim_height" value="16" step="0.01" min="0.001" oninput="calculate()" onkeyup="if(event.key==='Enter') this.blur();" class="w-full px-4 py-3.5 text-base font-black text-slate-800 shadow-sm no-spinners">
                   <span id="unit-label-h" class="absolute right-4 top-4 text-[10px] text-slate-400 font-bold uppercase">cm</span>
                 </div>
               </div>
@@ -613,15 +613,15 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label id="t-adm-eff-lbl" class="block text-[10px] font-bold text-slate-500 mb-1">Effisiensi SMPS (%)</label>
-                <input type="number" id="adm-eff" value="88" oninput="calculate()" class="w-full px-3 py-2 text-sm rounded-xl">
+                <input type="number" inputmode="numeric" id="adm-eff" value="88" oninput="calculate()" onkeyup="if(event.key==='Enter') this.blur();" class="w-full px-3 py-2 text-sm rounded-xl">
               </div>
               <div>
                 <label id="t-adm-pf-lbl" class="block text-[10px] font-bold text-slate-500 mb-1">Power Factor (Cos φ)</label>
-                <input type="number" id="adm-pf" value="0.95" step="0.01" oninput="calculate()" class="w-full px-3 py-2 text-sm rounded-xl">
+                <input type="number" inputmode="decimal" id="adm-pf" value="0.95" step="0.01" oninput="calculate()" onkeyup="if(event.key==='Enter') this.blur();" class="w-full px-3 py-2 text-sm rounded-xl">
               </div>
               <div>
                 <label id="t-adm-port-lbl" class="block text-[10px] font-bold text-slate-500 mb-1">Max Port Limit (Px)</label>
-                <input type="number" id="adm-port-cap" value="650000" oninput="calculate()" class="w-full px-3 py-2 text-sm rounded-xl">
+                <input type="number" inputmode="numeric" id="adm-port-cap" value="650000" oninput="calculate()" onkeyup="if(event.key==='Enter') this.blur();" class="w-full px-3 py-2 text-sm rounded-xl">
               </div>
             </div>
             <button id="t-adm-export-btn" type="button" onclick="openExportCodeModal()" class="w-full mt-3 py-2 bg-slate-800 text-cyan-300 rounded-xl text-[11px] font-bold shadow-md">💾 Ekspor Source HTML</button>
@@ -653,22 +653,22 @@
         <div class="grid grid-cols-2 gap-4">
             <div>
                 <label id="t-sr-rw-lbl" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Rasio Lebar</label>
-                <input type="number" id="sr-rw" placeholder="Auto" class="w-full px-4 py-3.5 text-sm font-black text-cyan-700 text-center no-spinners rounded-2xl">
+                <input type="number" inputmode="numeric" id="sr-rw" placeholder="Auto" onkeyup="if(event.key==='Enter') this.blur();" class="w-full px-4 py-3.5 text-sm font-black text-cyan-700 text-center no-spinners rounded-2xl">
             </div>
             <div>
                 <label id="t-sr-rh-lbl" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Rasio Tinggi</label>
-                <input type="number" id="sr-rh" placeholder="Auto" class="w-full px-4 py-3.5 text-sm font-black text-cyan-700 text-center no-spinners rounded-2xl">
+                <input type="number" inputmode="numeric" id="sr-rh" placeholder="Auto" onkeyup="if(event.key==='Enter') this.blur();" class="w-full px-4 py-3.5 text-sm font-black text-cyan-700 text-center no-spinners rounded-2xl">
             </div>
         </div>
 
         <div class="grid grid-cols-2 gap-4">
             <div>
                 <label id="t-sr-pxw-lbl" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Lebar Target (px)</label>
-                <input type="number" id="sr-pxw" placeholder="Ketik..." class="w-full px-4 py-3.5 text-sm font-black text-slate-800 no-spinners rounded-2xl">
+                <input type="number" inputmode="numeric" id="sr-pxw" placeholder="Ketik..." onkeyup="if(event.key==='Enter') this.blur();" class="w-full px-4 py-3.5 text-sm font-black text-slate-800 no-spinners rounded-2xl">
             </div>
             <div>
                 <label id="t-sr-pxh-lbl" class="block text-[11px] font-bold text-slate-500 mb-1.5 uppercase tracking-wider">Tinggi (px)</label>
-                <input type="number" id="sr-pxh" placeholder="Ketik..." class="w-full px-4 py-3.5 text-sm font-black text-slate-800 no-spinners rounded-2xl">
+                <input type="number" inputmode="numeric" id="sr-pxh" placeholder="Ketik..." onkeyup="if(event.key==='Enter') this.blur();" class="w-full px-4 py-3.5 text-sm font-black text-slate-800 no-spinners rounded-2xl">
             </div>
         </div>
 
@@ -768,7 +768,7 @@
           <p id="t-prof-desc" class="text-[10px] text-emerald-200 font-bold uppercase tracking-widest">Videotron Engineer</p>
         </div>
         
-        <a id="wa-link" href="#" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-4 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all mt-2">
+        <a id="wa-link" href="https://wa.me/628158855537?text=Halo%20Bang%20Mbong%2C%20ada%20yang%20mau%20saya%20konsultasikan%20mengenai%20videotron" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-4 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all mt-2">
           <span class="text-lg">💬</span> <span id="t-prof-wa">Hubungi WhatsApp</span>
         </a>
 
@@ -1442,28 +1442,34 @@
     function getCableSize1P(mcb) {
       const dict = DICTIONARY[currentLang];
       if (mcb <= 10) return "3 × 1.5 mm²";
-      if (mcb <= 16) return "3 × 2.5 mm²";
+      if (mcb <= 20) return "3 × 2.5 mm²";
       if (mcb <= 25) return "3 × 4.0 mm²";
       if (mcb <= 32) return "3 × 6.0 mm²";
-      if (mcb <= 40) return "3 × 10.0 mm²";
+      if (mcb <= 50) return "3 × 10.0 mm²";
       if (mcb <= 63) return "3 × 16.0 mm²";
       if (mcb <= 80) return "3 × 25.0 mm²";
       if (mcb <= 100) return "3 × 35.0 mm²";
       if (mcb <= 125) return "3 × 50.0 mm²";
+      if (mcb <= 160) return "3 × 70.0 mm²";
+      if (mcb <= 200) return "3 × 95.0 mm²";
+      if (mcb <= 250) return "3 × 120.0 mm²";
       return dict.call_tech;
     }
 
     function getCableSize3P(mcb) {
       const dict = DICTIONARY[currentLang];
       if (mcb <= 10) return "5 × 1.5 mm²";
-      if (mcb <= 16) return "5 × 2.5 mm²";
+      if (mcb <= 20) return "5 × 2.5 mm²";
       if (mcb <= 25) return "5 × 4.0 mm²";
       if (mcb <= 32) return "5 × 6.0 mm²";
-      if (mcb <= 40) return "5 × 10.0 mm²";
+      if (mcb <= 50) return "5 × 10.0 mm²";
       if (mcb <= 63) return "5 × 16.0 mm²";
       if (mcb <= 80) return "5 × 25.0 mm²";
       if (mcb <= 100) return "5 × 35.0 mm²";
       if (mcb <= 125) return "5 × 50.0 mm²";
+      if (mcb <= 160) return "5 × 70.0 mm²";
+      if (mcb <= 200) return "5 × 95.0 mm²";
+      if (mcb <= 250) return "5 × 120.0 mm²";
       return dict.call_tech;
     }
 
@@ -1817,6 +1823,32 @@
       document.getElementById('out-standard-ratio').innerText = aspect.name;
       document.getElementById('out-exact-ratio').innerText = `${aspect.frac} (${aspect.dec}:1)`;
 
+      // == KECOCOKAN VIDEO ADDED HERE ==
+      const ratioValue = pxW / pxH;
+      let matchStatus = "";
+      let matchClass = "";
+      
+      if (Math.abs(ratioValue - 16/9) < 0.05) {
+          matchStatus = currentLang === 'zh' ? '完美 (16:9 视频)' : (currentLang === 'en' ? 'Perfect (16:9 Video)' : 'Sempurna (Video 16:9)');
+          matchClass = "text-emerald-600 font-black";
+      } else if (Math.abs(ratioValue - 4/3) < 0.05) {
+          matchStatus = currentLang === 'zh' ? '良好 (4:3 视频)' : (currentLang === 'en' ? 'Good (4:3 Video)' : 'Baik (Video 4:3)');
+          matchClass = "text-cyan-600 font-black";
+      } else if (Math.abs(ratioValue - 21/9) < 0.05) {
+          matchStatus = currentLang === 'zh' ? '极佳 (21:9 视频)' : (currentLang === 'en' ? 'Excellent (21:9 Video)' : 'Sangat Baik (Video 21:9)');
+          matchClass = "text-blue-600 font-black";
+      } else {
+          matchStatus = currentLang === 'zh' ? '需自定义渲染' : (currentLang === 'en' ? 'Needs Custom Render' : 'Perlu Render Khusus');
+          matchClass = "text-amber-500 font-black";
+      }
+      
+      const elRatioStatus = document.getElementById('out-ratio-status');
+      if (elRatioStatus) {
+          elRatioStatus.innerText = matchStatus;
+          elRatioStatus.className = matchClass;
+      }
+      // == END KECOCOKAN VIDEO ==
+
       // ==========================================
       // LOGIKA RECEIVING CARD (RC) & LIMITASI PORT
       // ==========================================
@@ -2041,8 +2073,19 @@
     function openWhatsAppModal() { document.getElementById('wa-modal').classList.remove('hidden'); }
     function closeWhatsAppModal() { document.getElementById('wa-modal').classList.add('hidden'); }
 
+    function sendWhatsAppShare() {
+      if (!currentAITextRaw) { generateAITextForSharing(); }
+      const text = encodeURIComponent(currentAITextRaw);
+      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+      closeWhatsAppModal();
+    }
+
     function sendWhatsAppDirect() {
       let phone = document.getElementById('custom-wa-phone').value.replace(/\D/g, '');
+      if (!phone) { 
+        document.getElementById('custom-wa-phone').focus();
+        return; 
+      }
       if(phone.startsWith('0')) { phone = '62' + phone.substring(1); }
       if (!currentAITextRaw) { generateAITextForSharing(); }
       const text = encodeURIComponent(currentAITextRaw);
@@ -2077,53 +2120,54 @@
       const avgKw = document.getElementById('out-power-avg-kw').innerText;
       const current1P = document.getElementById('out-current-1p').innerText;
       const current3P = document.getElementById('out-current-3p').innerText;
+      const mcb1P = document.getElementById('out-mcb-1p').innerText;
       const mcb3P = document.getElementById('out-mcb-3p').innerText;
 
       if (currentLang === 'id') {
         const buildType = isCabinet ? `kabinet ukuran ${cabVal}mm` : `modul`;
-        currentAITextRaw = `Halo! Ini hasil kalkulasi teknis videotron dari sistem cerdas Bang Mbong. Kita bedah spesifikasinya biar eksekusi proyek kamu presisi dan aman. 🚀\n\n` +
-          `**1. Visual & Hardware**\n` +
-          `Layar ini dibangun menggunakan ${buildType} dengan spesifikasi ${pitchText}. Dengan dimensi fisik ${sizeStr} (luas ${area}), kita dapat resolusi murni di angka ${resW} x ${resH} pixel. Total kerapatan pikselnya mencapai ${totPx} dots. Artinya? Gambar bakal super tajam dan optimal kalau audiens melihat dari jarak minimal ${pitchNum} meter. Pastikan tim desain render konten persis di resolusi ini biar hasilnya maksimal!\n\n` +
-          `**2. Aspek Rasio & Konten**\n` +
-          `Rasio aktual layar ini ada di ${ratio} (${ratioName}). ` +
-          (ratioName !== 'Custom' ? `Mantap, ini rasio standar industri! Mutar video umum dijamin proporsional, bebas dari efek *stretch* (melar) atau *letterbox* (pinggiran hitam).\n\n` : `Karena ini ukuran 'Custom', tim visual wajib banget *lock* resolusi render di ${resW} x ${resH} pixel. Kalau nggak, gambar berisiko gepeng atau distorsi.\n\n`) +
+        currentAITextRaw = `Halo bosku! Ini Bang Mbong AI. Saya udah hitungin spek teknis buat videotron-nya nih. Yuk kita bedah bareng biar eksekusinya mulus dan aman di lapangan! 🚀\n\n` +
+          `**1. Visual & Resolusi**\n` +
+          `Kita pakai ${buildType} dengan spek ${pitchText}. Dimensi fisiknya di ${sizeStr} (luas ${area}). Nah, resolusi bersih yang kita dapat itu ${resW} x ${resH} px (Total: ${totPx} dots). Biar gambarnya kelihatan tajam maksimal dan nggak pecah, jarak tonton audiens idealnya dari ${pitchNum} meter atau lebih ya.\n\n` +
+          `**2. Aspek Rasio & Desain Konten**\n` +
+          `Untuk aspek rasionya jatuhnya di ${ratio} (${ratioName}). ` +
+          (ratioName !== 'Custom' ? `Asyik, ini udah masuk standar industri! Muter video YouTube atau materi promo standar pasti proporsional, nggak akan ada border hitam di pinggir atau ketarik.\n\n` : `Karena ukurannya custom, pesen ke tim desain grafis/animator buat wajib bikin kanvas video persis di resolusi ${resW} x ${resH} px. Kalau meleset dikit aja, gambarnya berisiko gepeng atau distorsi.\n\n`) +
           `**3. Engine & Control System**\n` +
-          `Buat ngangkat jutaan piksel ini tanpa *lag* atau *frame drop*, rekomendasi *Video Processor* utama kita adalah **${novaMain}** (opsi alternatif: ${novaAlt}). Hardware ini sanggup memproses data seberat ${totPx} pixel dengan mulus. Kamu butuh **${ports}** untuk distribusi sinyalnya. *Pro tip:* Rancang topologi kabel data (RJ45) se-efisien mungkin dan sisakan minimal 1 port kosong untuk *redundancy* (jalur *backup*).\n\n` +
-          `**4. Rekayasa Daya (Kelistrikan)**\n` +
-          `Ini part paling krusial buat *safety*. Layar akan menarik daya puncak (Peak Power) sekitar ${kw} kW saat tes warna putih *full*, tapi santai, rata-rata konsumsi harian saat mutar video cuma di kisaran ${avgKw} kW.\n` +
-          (parseFloat(current1P) > 20 ? `🚨 **CRITICAL WARNING:** Beban arusnya cukup ekstrem, tembus ${current1P}A di jalur 1 Fasa. **Sangat tidak disarankan** pakai listrik 220V biasa karena rawan *overheat* dan trip. Wajib *upgrade* ke panel 3 Fasa (380V) biar beban terdistribusi merata jadi cuma ${current3P}A per fasa. Amankan dengan MCB ${mcb3P} biar instalasi bebas risiko.\n\n` : `✅ **STATUS AMAN:** Beban arus masih rileks di angka ${current1P}A. Pakai kelistrikan standar 1 Fasa (220V) sudah sangat aman dan mumpuni untuk *setup* ini.\n\n`) +
-          `Semoga data teknis ini mempermudah proses instalasi kamu. Butuh *troubleshooting* lebih lanjut? Tinggal kontak Bang Mbong. 🍻\n` +
-          `-- Mbong AI --`;
+          `Buat ngangkat jutaan piksel ini tanpa ngelag atau patah-patah, mesin utamanya saya sarankan pakai **${novaMain}** (opsi alternatif: ${novaAlt}). Hardware ini udah lebih dari cukup buat handle data ratenya. Siapin minimal **${ports}** tarikan buat distribusi sinyalnya. *Saran teknisi:* Rancang kabel data (RJ45) serapi mungkin dan sebisa mungkin tarik 1 jalur extra buat *backup* (redundancy) jaga-jaga kalau kabel utama bermasalah.\n\n` +
+          `**4. Rekayasa Daya (Penting!)**\n` +
+          `Ini bagian yang nggak boleh disepelein—urusan setrum. Waktu ngetes warna putih full (beban maksimal), layar ini bakal nyedot sekitar ${kw} kW. Tapi pas udah jalan muter video normal, rata-rata konsumsinya turun di kisaran ${avgKw} kW.\n` +
+          (parseFloat(current1P) > 20 ? `🚨 **WARNING DARI BANG MBONG:** Beban arusnya lumayan ngeri nih, tembus ${current1P}A kalau dipaksa pakai listrik 1 Fasa (220V). Rawan banget kabel panas atau MCB anjlok. Saran wajib dari saya: pecah ke listrik panel 3 Fasa (380V). Nanti beban per fasanya jadi jauh lebih enteng, cuma ${current3P}A aja. Pasang MCB ${mcb3P} biar tidur nyenyak dan instalasi aman sentosa.\n\n` : `✅ **STATUS AMAN:** Tarikan arusnya santai banget di ${current1P}A. Pakai instalasi standar 1 Fasa (220V) aja udah lebih dari cukup. Tinggal pasang MCB ${mcb1P} dan pakai ukuran kabel yang bener, aman deh.\n\n`) +
+          `Semoga data teknis ini ngebantu kelancaran proyeknya ya. Kalau masih ada yang ganjel atau mau diskusi soal wiring, langsung aja kontak Bang Mbong. Gaspol! 🍻\n` +
+          `-- Mbong AI Engine --`;
       } else if (currentLang === 'en') {
         const buildType = isCabinet ? `${cabVal}mm cabinets` : `modules`;
-        currentAITextRaw = `Hello! Here is the technical calculation for your LED display powered by Bang Mbong's engine. Let's break down the specs to ensure a precise and safe execution. 🚀\n\n` +
-          `**1. Visual & Hardware**\n` +
-          `We're deploying this screen using ${buildType} specified at ${pitchText}. With physical dimensions of ${sizeStr} (total area: ${area}), the native resolution locks in at ${resW} x ${resH} pixels. That’s a total density of ${totPx} dots. What does this mean? The display will deliver ultra-sharp visuals when viewed from an optimal distance of ${pitchNum} meters and beyond. Make sure your design team renders content exactly to this resolution!\n\n` +
-          `**2. Aspect Ratio & Content Layout**\n` +
-          `This display features a ${ratio} aspect ratio (${ratioName}). ` +
-          (ratioName !== 'Custom' ? `Great news, this is an industry standard! Playing standard video content will be perfectly proportional—no awkward stretching or black bars (letterboxing).\n\n` : `Since we're dealing with a 'Custom' aspect ratio, your visual team absolutely must lock their render settings to ${resW} x ${resH} pixels to avoid any squished or distorted imagery.\n\n`) +
+        currentAITextRaw = `Hey there! Mbong AI here. I've crunched the numbers for your LED display project. Let's break down the technical specs so your execution is flawless and perfectly safe! 🚀\n\n` +
+          `**1. Visual & Resolution**\n` +
+          `We're building this using ${buildType} with a ${pitchText} spec. The physical size comes out to ${sizeStr} (total area: ${area}), giving us a crystal-clear native resolution of ${resW} x ${resH} px (${totPx} dots total). For the absolute best viewing experience without pixelation, your audience should be standing at least ${pitchNum} meters away.\n\n` +
+          `**2. Aspect Ratio & Content Design**\n` +
+          `The aspect ratio lands at ${ratio} (${ratioName}). ` +
+          (ratioName !== 'Custom' ? `Awesome, this hits the industry standard! Playing standard videos will look perfectly proportional without any awkward black bars (letterboxing) or stretching.\n\n` : `Since this is a custom size, please warn your motion graphics/design team to lock their canvas exactly at ${resW} x ${resH} px. If they don't, the image will stretch or distort.\n\n`) +
           `**3. Engine & Control System**\n` +
-          `To drive millions of pixels smoothly without latency or dropped frames, our primary recommended *Video Processor* is the **${novaMain}** (alternative option: ${novaAlt}). This hardware easily handles the ${totPx}-pixel data load. You will need **${ports}** for signal distribution. *Pro tip:* Optimize your RJ45 data cable topology and always try to leave at least 1 port empty for redundancy (backup routing).\n\n` +
-          `**4. Power Engineering (Electrical)**\n` +
-          `This is the most critical part for safety. The display will hit a Peak Power draw of around ${kw} kW during a 100% full-white test, but don't worry, the average daily consumption during normal video playback is only about ${avgKw} kW.\n` +
-          (parseFloat(current1P) > 20 ? `🚨 **CRITICAL WARNING:** The current draw is heavily concentrated, reaching ${current1P}A on a single phase. It is **highly discouraged** to use a standard 220V setup as it poses severe overheating and tripping risks. You MUST upgrade to a 3-Phase (380V) distribution panel to balance the load down to a safe ${current3P}A per phase. Secure the setup with a ${mcb3P} MCB to ensure a hazard-free installation.\n\n` : `✅ **SAFE STATUS:** The current draw is completely relaxed at around ${current1P}A. A standard 1-Phase (220V) electrical setup is perfectly safe and highly capable for this configuration.\n\n`) +
-          `Hope this technical breakdown streamlines your installation process. Need further troubleshooting? Just reach out to Bang Mbong. 🍻\n` +
-          `-- Mbong AI --`;
+          `To drive this many pixels smoothly without any lag or frame drops, I highly recommend using the **${novaMain}** as your main processor (alternative: ${novaAlt}). It has plenty of horsepower for this load. You'll need to run **${ports}** RJ45 LAN cable(s) to distribute the signal. *Pro tip:* Keep your RJ45 data cabling tidy and always run at least one extra cable as a backup (redundancy) just in case a primary line fails.\n\n` +
+          `**4. Power Engineering (Crucial!)**\n` +
+          `Now for the most critical part: power. When running a full-white test (maximum load), this screen will draw about ${kw} kW. However, during normal video playback, the average consumption drops to around ${avgKw} kW.\n` +
+          (parseFloat(current1P) > 20 ? `🚨 **MBONG'S WARNING:** The current draw is quite heavy, hitting ${current1P}A if forced on a single phase (220V). This is a huge risk for overheating cables or tripped breakers. My strong recommendation: upgrade to a 3-Phase (380V) distribution panel. This balances the load beautifully to just ${current3P}A per phase. Secure it with a ${mcb3P} MCB and you'll sleep soundly knowing your installation is safe.\n\n` : `✅ **ALL CLEAR:** The current draw is a very relaxed ${current1P}A. A standard 1-Phase (220V) installation will handle this effortlessly. Just use the recommended ${mcb1P} MCB and proper cable sizing, and you're good to go.\n\n`) +
+          `Hope this technical brief makes your installation a breeze. If you hit any snags or need to discuss wiring topographies, Bang Mbong is just a text away. Cheers! 🍻\n` +
+          `-- Mbong AI Engine --`;
       } else if (currentLang === 'zh') {
         const buildType = isCabinet ? `${cabVal}mm 箱体` : `模组`;
-        currentAITextRaw = `您好！这是由 Bang Mbong 智能引擎生成的 LED 显示屏技术参数计算结果。我们来详细拆解规格，确保项目执行精准且安全。🚀\n\n` +
-          `**1. 视觉与硬件**\n` +
-          `屏幕采用 ${pitchText} 规格的 ${buildType} 构建。物理尺寸为 ${sizeStr}（总面积 ${area}），原生分辨率达到精准的 ${resW} x ${resH} 像素。总像素密度高达 ${totPx} 点。这意味着在 ${pitchNum} 米以上的最佳观看距离，画面将极其锐利。请务必让设计团队按照此分辨率渲染内容以达到最佳效果！\n\n` +
-          `**2. 宽高比与内容布局**\n` +
-          `该屏幕的实际比例为 ${ratio} (${ratioName})。` +
-          (ratioName !== 'Custom' ? `太棒了，这是行业标准比例！播放常规视频保证比例完美，绝对不会出现画面拉伸或黑边（Letterboxing）。\n\n` : `由于这是“自定义”比例，您的视觉团队必须将渲染分辨率锁定为 ${resW} x ${resH} 像素，以防图像被挤压或失真。\n\n`) +
+        currentAITextRaw = `嗨！我是 Mbong AI。我已经为您算好了 LED 屏幕的技术参数。让我们一起把细节过一遍，确保您的项目落地既完美又安全！🚀\n\n` +
+          `**1. 视觉与分辨率**\n` +
+          `我们这次采用 ${pitchText} 规格的 ${buildType}。物理尺寸为 ${sizeStr}（总面积 ${area}），点亮后的原生分辨率是 ${resW} x ${resH} 像素（总计 ${totPx} 个像素点）。为了保证画面清晰不带颗粒感，观众的最佳观看距离建议在 ${pitchNum} 米或更远。\n\n` +
+          `**2. 纵横比与内容设计**\n` +
+          `屏幕的实际纵横比为 ${ratio} (${ratioName})。` +
+          (ratioName !== 'Custom' ? `太棒了，这完全符合行业标准比例！播放常规视频时画面会非常匀称，绝对不会出现恼人的黑边或拉伸变形。\n\n` : `因为这是一个自定义的比例，请务必叮嘱您的视觉设计团队，一定要把渲染分辨率锁定在绝对精确的 ${resW} x ${resH} 像素。差一点都可能会导致画面被拉伸或压扁。\n\n`) +
           `**3. 核心引擎与控制系统**\n` +
-          `为了无延迟、零掉帧地驱动这几百万像素，我们主推的视频处理器是 **${novaMain}**（备选方案：${novaAlt}）。该硬件能丝滑处理 ${totPx} 像素的数据负载。在信号分配上，您需要 **${ports}**。*专业建议*：优化网线 (RJ45) 走线拓扑，并尽量保留至少 1 个空闲网口作为冗余备份。\n\n` +
-          `**4. 电力工程 (安全建议)**\n` +
-          `这是关乎安全的最关键部分。屏幕在全白测试时的峰值功耗约为 ${kw} kW，但请放心，日常播放视频的平均功耗仅在 ${avgKw} kW 左右。\n` +
-          (parseFloat(current1P) > 20 ? `🚨 **严重警告**：单相电流负载过高，达到惊人的 ${current1P}A。**极不建议**使用普通的 220V 单相电，这会带来严重的过热和跳闸风险。您必须升级至三相 (380V) 配电柜，将负载均衡至每相安全的 ${current3P}A。搭配 ${mcb3P} 断路器以确保用电绝对安全。\n\n` : `✅ **状态安全**：当前电流仅约为 ${current1P}A，处于非常放松的状态。标准的单相 (220V) 供电系统对该配置来说已经非常安全且完全胜任。\n\n`) +
-          `希望这些技术数据能让您的安装过程更顺畅。如果需要进一步的故障排除支持，随时联系 Bang Mbong。🍻\n` +
-          `-- Mbong AI --`;
+          `带这么多像素点，为了确保画面丝滑无延迟、不掉帧，我强烈建议使用 **${novaMain}** 作为主控设备（备选：${novaAlt}）。它的算力完全够用。您需要准备 **${ports}** 根 RJ45 网线来分配信号。*老兵建议*：排线时尽量整洁，并最好多留 1 根网线作为冗余备份，以防主线路出现故障。\n\n` +
+          `**4. 电力工程 (非常重要！)**\n` +
+          `接下来是最不能马虎的用电部分。在全白测试（满载）时，这块屏幕会消耗大约 ${kw} kW 的功率。但在正常播放视频时，平均功耗会降到 ${avgKw} kW 左右。\n` +
+          (parseFloat(current1P) > 20 ? `🚨 **MBONG 的严重警告**：电流负载相当大，如果强行使用单相电 (220V)，电流会飙升到 ${current1P}A。这极易导致电缆发热或频繁跳闸！我强烈建议：必须采用三相电 (380V) 配电柜。这样每相负载就会被完美分摊到仅仅 ${current3P}A。配合 ${mcb3P} 的空气开关，您的工程就会稳如泰山。\n\n` : `✅ **安全状态**：当前电流仅为 ${current1P}A，非常轻松。使用标准的单相电 (220V) 安装就绰绰有余。只要配上 ${mcb1P} 的空开和合格的线缆，就万事大吉了。\n\n`) +
+          `希望这份技术摘要能帮您避开安装中的坑。如果遇到任何技术难题或需要讨论布线，随时联系 Bang Mbong。祝项目顺利！🍻\n` +
+          `-- Mbong AI 智能引擎 --`;
       }
     }
 
@@ -2171,7 +2215,16 @@
       }
     }
     
-    window.onload = function() { populatePitchOptions(); calculate(); };
+    window.onload = function() { 
+        populatePitchOptions(); 
+        calculate(); 
+        
+        // Memastikan link WhatsApp Profil terinisiasi saat pertama kali dirender
+        const waLink = document.getElementById('wa-link');
+        if (waLink) {
+            waLink.href = `https://wa.me/628158855537?text=${encodeURIComponent(DICTIONARY[currentLang].wa_msg)}`;
+        }
+    };
     
     // ==========================================
     // LOGIKA FITUR BARU: SMART RATIO
